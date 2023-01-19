@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebApp.Models.RoleViewModel>
+@{
+	ViewData["Title"] = "Perfis de Acesso";
+}
+
+<style>
+    
+    .table td, .table th {
+        padding: .25rem;
+    }
+    .btn{padding: .2rem .5rem;}
+</style> 
+
+<h4>@ViewData["Title"]</h4>
+
+<table class="table">
+	<thead>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Name)
+		</th>
+		<th>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Name)
+			</td>
+			<td>
+				<a class="btn btn-outline-secondary modal-link small-txt" href="#" title="Ver Perfil @item.Name" url='@Url.Content("~/Admin/ViewRole")/@item.Id' >Ver </a>
+				<a class="btn btn-outline-secondary small-txt"  asp-action="DeleteRole" asp-controller="Admin" asp-route-id="@item.Id">Apagar...</a>
+				<a class="btn btn-outline-secondary small-txt" asp-action="EditRole" asp-controller="Admin" asp-route-id="@item.Id">Editar...</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>
+
+ 

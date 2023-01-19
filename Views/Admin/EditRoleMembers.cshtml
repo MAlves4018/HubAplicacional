@@ -1,0 +1,53 @@
+﻿@model WebApp.Models.RoleViewModel
+
+@{
+
+    ViewData["ActivePage"] = "EditRoleMembers";
+    Layout = "_LayoutRole";
+} 
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="Name"/>
+            <div class="form-group">
+
+                <table class="table">
+                    <thead>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Members)
+                    </th>
+                    </thead>
+                    <tbody>
+
+                    @for (var i = 0; i < Model.Members.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" asp-for="@Model.Members[i].Selected"/>
+                                <label class="txt-btn modal-link" style="margin-left:10px;" title="Ver utilizador @Model.Members[i].UserName" url='@Url.Content("~/Admin/ViewUser")/@Model.Members[i].Id' >@Model.Members[i].UserName</label>
+
+                                <input type="hidden" asp-for="@Model.Members[i].Id"/>
+                                <input type="hidden" asp-for="@Model.Members[i].UserName"/>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+
+            </div>
+            <hr/>
+            <div class="form-group form-btns">
+                <input type="submit" value="Guardar" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+<div>
+    <a class="btn btn-secondary" asp-action="Roles">Voltar</a>
+</div>
+
+ 

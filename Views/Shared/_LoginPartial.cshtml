@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WebApp.Models.ApplicationModels
+@using  WebApp.Data;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated) //Se for admin pode criar
+    {
+        <li class="nav-item me-3">
+            <strong>@User.Identity.Name</strong>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text" asp-controller="Home" asp-action="Index">Iniciar Sessão</a>
+        </li>
+    }
+</ul>

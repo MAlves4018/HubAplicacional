@@ -1,0 +1,76 @@
+﻿@model WebApp.Models.UserViewModel
+@using WebApp.Models.ApplicationModels
+
+
+
+@{
+
+    ViewData["ActivePage"] = "EditUser";
+    Layout = "_LayoutUser";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+
+            <div class="form-group">
+                <label>
+                    <strong> @Html.DisplayNameFor(model => model.UserName)</strong>
+                </label><br />
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+                <hr />
+                <label>
+                    <strong> @Html.DisplayNameFor(model => model.Email)</strong>
+                </label><br />
+                <input asp-for="Email" class="form-control" disabled />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <hr />
+               
+                
+                <label>
+             @*       <strong>@Html.DisplayNameFor(model => model.EntidadesSetoriais)</strong>
+                </label><br />
+              
+                *@
+                
+              @*  <select id="centrosDepositos" class="select2" tabindex="5" multiple="multiple" style="width:100%" asp-for="EntidadesSetoriais">
+
+                    @foreach (EntidadesSetoriais entidadesSetoriais in (List<EntidadesSetoriais>)@ViewBag.EntidadesSetoriais)
+                    {
+                        var contains = false;
+                        if (Model.EntidadesSetoriais != null)
+                        {
+                            contains = Model.EntidadesSetoriais.Contains(entidadesSetoriais) ? true : false;
+                        }
+                        <option value="@entidadesSetoriais.Id" selected="@contains">@entidadesSetoriais.Sigla</option>
+                    }
+                    }
+                </select>*@
+
+
+
+            </div>
+
+            <br />
+            <div class="form-group form-btns">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<div>
+    <a class="btn btn-secondary" asp-action="Users">Voltar</a>
+</div>
+@section Scripts {
+<script>
+</script>
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+ }
+
+}

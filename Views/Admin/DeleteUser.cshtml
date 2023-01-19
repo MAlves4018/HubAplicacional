@@ -1,0 +1,38 @@
+﻿@model WebApp.Models.UserViewModel
+
+
+@{
+
+    ViewData["ActivePage"] = "DeleteUser";
+    Layout = "_LayoutUser";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            
+            <div class="form-group">
+
+                <div class="alert alert-danger text-dark">
+                    <p>
+                        <strong>Quer apagar o utilizador:</strong>
+                    </p>
+                    <p>
+                        <strong class="text-yellow">@Model.UserName - @Model.Email ?</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group form-btns">
+                <input class="btn btn-danger confirm-action" confirm-action-msg="Quer mesmo apagar o utilizador @Model.UserName ?" type="submit" value="Apagar"/>
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+<div>
+    <a class="btn btn-secondary" asp-action="Users">Voltar</a>
+</div>
+ 

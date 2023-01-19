@@ -1,0 +1,49 @@
+﻿@model WebApp.Models.UserViewModel
+
+@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        //Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+        Layout = "_Layout";
+    }
+    
+    if (! ViewData.TryGetValue("ActivePage", out var activePage))
+    {
+        activePage = "EditUser";
+    }
+    
+    var p0 = (ReferenceEquals(activePage, "ViewUser")) ? "active" : "";
+    var p1 = (ReferenceEquals(activePage, "EditUser")) ? "active" : "";
+    var p2 = (ReferenceEquals(activePage, "EditUserMembership")) ? "active" : "";
+    var p3 = (ReferenceEquals(activePage, "DeleteUser")) ? "active" : "";
+
+}
+
+<h5>Editar Utilizador <span class="text-yellow">@Html.DisplayFor(model => model.UserName)</span> </h5>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item"><a class="nav-link @p0" id="idx" asp-action="ViewUser" asp-controller="Admin" asp-route-p="true" asp-route-id="@Model.Id">Sumário</a></li>
+                <li class="nav-item"><a class="nav-link @p1" id="details" asp-action="EditUser" asp-controller="Admin" asp-route-id="@Model.Id">Atributos</a></li>
+                <li class="nav-item"><a class="nav-link @p2" id="membership" asp-action="EditUserMembership" asp-controller="Admin" asp-route-id="@Model.Id">Perfis</a></li>
+                <li class="nav-item"><a class="nav-link @p3" id="delete" asp-action="DeleteUser" asp-controller="Admin" asp-route-id="@Model.Id">Apagar Utilizador</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+   @RenderSection("Scripts", required: false)
+}

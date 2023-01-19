@@ -1,0 +1,37 @@
+﻿@model  WebApp.Models.NavigationMenuModel
+
+@{
+    Layout = null;
+}
+ 
+<div class="t-table">
+    <div class="t-row">
+        <span class="font-weight-bold">@Html.DisplayNameFor(model => model.Name)</span>
+        <span>@Html.DisplayFor(model => model.Name)</span>
+    </div>
+    
+    <div class="t-row ">
+        <span class="font-weight-bold">@Html.DisplayNameFor(model => model.ControllerName)</span>
+        <span>@Html.DisplayFor(model => model.ControllerName)</span>
+    </div>
+    <div class="t-row ">
+        <span class="font-weight-bold">@Html.DisplayNameFor(model => model.ActionName)</span>
+        <span>@Html.DisplayFor(model => model.ActionName)</span>
+    </div>
+    <div class="t-row ">
+        <span class="font-weight-bold">@Html.DisplayNameFor(model => model.Visible)</span>
+        <span>
+            <input onclick="return false;" class="t-single-chk readonly-check" asp-for="Visible"/>
+        </span>
+    </div>
+    <div class="t-row ">
+        <span class="font-weight-bold">@Html.DisplayNameFor(model => model.IsExternal)</span>
+        <span>
+            <input onclick="return false;" class="t-single-chk readonly-check" asp-for="IsExternal"/>
+        </span>
+    </div>
+    <div class="t-row ">
+        <span class="font-weight-bold">@Html.DisplayNameFor(model => model.ExternalUrl)</span>
+        <span>@Html.DisplayFor(model => model.ExternalUrl)</span>
+    </div>
+</div>

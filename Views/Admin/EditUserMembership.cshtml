@@ -1,0 +1,55 @@
+﻿@model WebApp.Models.UserViewModel
+
+@{
+
+    ViewData["ActivePage"] = "EditUserMembership";
+    Layout = "_LayoutUser";
+}
+ 
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" class="form-control"/>
+            <input type="hidden" asp-for="UserName" class="form-control"/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Roles)
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @for (var i = 0; i < Model.Roles.Length; i++)
+                {
+                    <tr>
+                        <td>
+
+                            <input type="checkbox" asp-for="@Model.Roles[i].Selected"/>
+                            <label style="margin-left:10px;" asp-for="@Model.Roles[i].Selected">@Model.Roles[i].Name</label>
+                            <input type="hidden" asp-for="@Model.Roles[i].Id"/>
+                            <input type="hidden" asp-for="@Model.Roles[i].Name"/>
+                        </td>
+                    </tr>
+                }
+                
+                </tbody>
+            </table>
+
+
+            <div class="form-group form-btns">
+                <input type="submit" value="Guardar" class="btn btn-success"/>
+               
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+<div>
+    <a class="btn btn-secondary" asp-action="Users">Voltar</a>
+</div>
+
+ 

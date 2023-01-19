@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApp.Models.UserViewModel>
+@{
+    ViewData["Title"] = "Utilizadores";
+}
+
+<style>
+    
+    .table td, .table th {
+        padding: .25rem;
+    }
+    .btn{padding: .2rem .5rem;}
+</style> 
+
+<h4>Utilizadores</h4>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>@Html.DisplayNameFor(model => model.Roles)</th>
+          <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @foreach (var role in item.Roles){
+                    <a class="btn btn-outline-secondary modal-link small-txt" href="#" title="Ver Perfil @role.Name" url='@Url.Content("~/Admin/ViewRole")/@role.Id'> @role.Name </a>
+                }
+            </td>
+            <td>
+                @* <a class="btn btn-outline-secondary modal-link" href="#" title="Permissões do utilizador @item.UserName" url="@Url.Content("~/Admin/ViewUserPermissions/@item.Id")">Permissões</a> *@
+                <a class="btn btn-outline-secondary modal-link small-txt" href="#" title="Ver utilizador @item.UserName" url='@Url.Content("~/Admin/ViewUser")/@item.Id'>Ver</a>
+                <a class="testBtn btn btn-outline-secondary small-txt" title="Apagar utilizador @item.UserName" asp-action="DeleteUser" asp-controller="Admin" asp-route-id="@item.Id">Apagar...</a>
+                <a class="btn btn-outline-secondary small-txt" title="Editar utilizador @item.UserName" asp-action="EditUser" asp-controller="Admin" asp-route-id="@item.Id">Editar...</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

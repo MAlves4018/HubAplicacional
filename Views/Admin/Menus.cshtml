@@ -1,0 +1,136 @@
+﻿@model WebApp.Models.NavigationMenusViewModel
+
+@{
+    ViewData["Title"] = "Editar menus";
+
+
+}
+
+<h4>Editar Menus</h4>
+<hr />
+
+
+@*Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#EditPermissionDlg">Open Modal</button>
+    Modal*@
+<div id="edt-dlg-box" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="modal-title">Editar Menu</div>
+                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="font-weight-bold">
+                                Nome
+                            </td>
+                            <td class="col-md-12 d-flex ">
+                                <input type="text" class="flex-fill" data-val="true" data-val-length="O nome tem pelo menos 2 caracteres" data-val-length-max="50" data-val-length-min="2" data-val-regex="Utilize apenas alfanuméricos" data-val-regex-pattern="^[a-z,A-Z,0-9]*$" data-val-required="O Nome é obrigatório" id="edt-Name" maxlength="50" name="edt-Name" />
+                            </td>
+                        </tr>
+                      @*  <tr>
+                            <td class="font-weight-bold">
+                                Área
+                            </td>
+                            <td class="col-md-12 d-flex ">
+                                <input type="text" class="flex-fill" data-val="true" data-val-length="A área tem até 50 caracteres" data-val-length-max="50" data-val-regex="Utilize apenas alfanuméricos" data-val-regex-pattern="^[a-z,A-Z,0-9]*$" id="edt-Area" maxlength="50" name="edt-Area" />
+                            </td>
+                        </tr>*@
+                        <tr>
+                            <td class="font-weight-bold">
+                                Controlador
+                            </td>
+                            <td class="col-md-12 d-flex ">
+                                <input type="text" class="flex-fill" data-val="true" data-val-length="A área tem até 50 caracteres" data-val-length-max="50" data-val-regex="Utilize apenas alfanuméricos" data-val-regex-pattern="^[a-z,A-Z,0-9]*$" id="edt-ControllerName" maxlength="50" name="edt-ControllerName" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">
+                                Comando
+                            </td>
+                            <td class="col-md-12 d-flex ">
+                                <input type="text" class="flex-fill" data-val="true" data-val-length="A área tem até 50 caracteres" data-val-length-max="50" data-val-regex="Utilize apenas alfanuméricos" data-val-regex-pattern="^[a-z,A-Z,0-9]*$" id="edt-ActionName" maxlength="50" name="edt-ActionName" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">
+                                Visível
+                            </td>
+                            <td class="col-md-12 d-flex ">
+                                <input type="checkbox" id="edt-Visible" name="edt-Visible" style=" margin: 8px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">
+                                Link externo
+                            </td>
+                            <td class="col-md-12 d-flex ">
+                                <input type="checkbox" id="edt-IsExternal" name="edt-IsExternal" style=" margin: 8px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">
+                                Link para URL
+                            </td>
+                            <td class="col-md-12 d-flex ">
+                                <input type="text" class="flex-fill" data-val="true" data-val-length="A área tem até 250 caracteres" data-val-length-max="250" data-val-regex="Utilize apenas alfanuméricos" data-val-regex-pattern="^[a-z,A-Z,0-9]*$" id="edt-ExternalUrl" maxlength="250" name="edt-ExternalUrl" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button id="edt-btn-ok" type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="tree-container" id="tree-container">
+
+   <div class='tree-header '></div>
+    @*the place where the content has to be placed*@
+    <ul class='tree space first-space'></ul>
+
+
+
+    @*<div class="col-md-4">
+            <section>
+                <div class="display">
+                    <details open>
+                        <summary>Data</summary>
+                        <pre class="data">{}</pre>
+                    </details>
+                </div>
+            </section>
+        </div>*@
+
+</div>
+
+<hr />
+<div class="row">
+</div>
+<div class="row d-flex justify-content-around">
+
+    <form method="post" style="width:100%;">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Menus" class="form-control" />
+
+        <div class="form-group d-flex justify-content-around" style="display:flex!important;">
+            <a asp-action="Menus" class="btn btn-secondary">Cancelar alterações</a>
+            <a class="btn btn-success text-light" id="new-node-btn">Adicionar novo registo</a>
+            <input type="submit" value="Guardar alterações" class="btn btn-primary" id="btn-submit" />
+
+        </div>
+    </form>
+
+</div>
+
+ 

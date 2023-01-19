@@ -1,0 +1,95 @@
+﻿@{
+    @inject WebApp.Services.IUserMessages UserMessages;
+
+}
+ 
+<!DOCTYPE html>
+<html lang="pt" class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @*<title>@ViewData["Title"]</title>*@
+    <title>WEBAPP_NAME</title> 
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+     
+   @* <script src="~/dist/main.js" defer></script>*@
+
+  @*  <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
+    <link href="~/node_modules/jstree/dist/themes/default/style.min.css" rel="stylesheet" />*@
+     <link rel="stylesheet" href="~/dist/main.css" /> 
+    @*<link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />*@
+    @*<link href="~/css/bootstrap-toaster.css" rel="stylesheet" />*@
+    @*<link href="~/css/accordion.css" rel="stylesheet" />*@
+    @*<link href="~/lib/DataTables/datatables.min.css" rel="stylesheet" />*@
+    @*<link href="~/css/global.css" rel="stylesheet" />*@
+    <style>
+
+        footer a {
+            color: rgba(255,255,255,.5);
+        }
+
+            footer a:hover {
+                color: rgba(255,255,255,1);
+                text-decoration: none;
+            }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top text-white">
+            @await Component.InvokeAsync("NavigationMenu")
+        </nav>
+    </header>
+    <br />
+    <br />
+    <div style="margin-top: 50px;" class="container-fluid">
+        <main role="main" class="pb-3 container">
+            @RenderBody()
+
+            <button type="button" class="d-none btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-link-dlg-box">
+                Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal-link-dlg-box" tabindex="-1" aria-labelledby="modal-link-dlg-box" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="footer mt-auto py-3 bg-dark text-white">
+        <div class="d-flex justify-content-around">
+            <span>&copy;  2022 DCSI/DDABI - Todos os direitos reservados.</span>
+            <span><a asp-area="" asp-controller="Home" asp-action="Privacy">Política de Privacidade</a></span>
+
+        </div> 
+    </footer>
+    
+    @*<script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+@*    <script src="~/node_modules/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/node_modules/@@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="~/node_modules/jstree/dist/jstree.min.js"></script>*@
+    @*<script src="~/js/tree_helper.js"></script>*@
+    @*<script src="~/js/bootstrap-toaster.js"></script>*@
+    @*<script src="~/js/accordion.js"></script>*@
+    @*<script src="~/lib/DataTables/datatables.min.js"></script>*@
+
+    <script src="~/dist/main.js" defer ></script> 
+    <script>  
+        var siteModelErrors =  @Html.Raw(UserMessages.GetUserMessages()); 
+    </script>  
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

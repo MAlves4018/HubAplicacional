@@ -1,0 +1,106 @@
+﻿body {
+}
+
+.accordion {
+    width: 300px;
+    min-width: max-content;
+    max-height: 100vh;
+    overflow-y: auto;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+
+@media only screen and (max-width: 576px) {
+
+    .accordion {
+      width:unset;
+    }
+
+}
+
+
+.accordion li {
+    list-style-type: none;
+}
+
+
+    .accordion a {
+        padding: 0 10px;
+        font-size: 90%;
+        line-height: 44px;
+        display: block;
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+        min-width: max-content;
+        transition: all 0.15s;
+        position: relative;
+        border-left: 5px solid transparent;
+    }
+
+    .accordion  a:hover {
+        background: #003545;
+        color: white !important;
+        background-color: rgba(255,255,255,.5) !important;
+    }
+
+.accordion ul ul {
+    display: none;
+}
+
+.accordion li.active > ul {
+    display: block;
+    border-left: 5px solid green;
+}
+
+.accordion ul ul ul {
+    margin-left: 15px;
+    border-left: 1px dotted rgba(0, 0, 0, 0.5);
+}
+
+    .accordion a:not(:only-child) {
+        background: #242a30;
+        /* background: linear-gradient(#003040, #002535);*/
+    }
+        .accordion a:not(:only-child):hover {
+            background: #003545;
+            /* border-left: 5px solid lightgreen;*/
+            color: white !important;
+            background-color: rgba(255,255,255,.5) !important;
+        }
+
+.accordion a:not(:only-child):after {
+    float: right;
+    margin-top: 10px;
+    margin-left: 20px;
+    content: "\f231";
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.accordion .active > a:not(:only-child):after {
+    float: right;
+    margin-top: 10px;
+    margin-left: 20px;
+    content: "\f229";
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

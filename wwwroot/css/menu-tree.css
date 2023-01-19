@@ -1,0 +1,195 @@
+﻿
+
+
+/*
+.display {
+     width: calc(50vmax - 2 * 40px); 
+    width: fit-content;
+    max-width: 200px;
+    height: auto;
+    margin: 5px 0 0 20px
+}
+
+
+details > summary {
+    cursor: pointer;
+    outline: none;
+}
+
+.data {
+    border: 1px solid #ccc;
+    min-height: 20px;
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+*/
+
+/********  items **********/
+
+
+.tree-container {
+    /*min-height: 500px;*/
+    background: #eee;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    box-shadow: 0px 0px 10px 2px #bbb;
+    padding: 20px 20px 50px 20px;
+}
+
+.expandable {
+    display: block;
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin: 1px 5px 0 0;
+    cursor: pointer;
+    transform: scale(1.6);
+    position: absolute;
+    left: -2px;
+    top: -2px;
+}
+    .expandable.open {
+        left: -11px;
+        top: 0px;
+        -moz-transform: rotate(90deg) scale(1.6);
+        -o-transform: rotate(90deg) scale(1.6);
+        transform: rotate(90deg) scale(1.6);
+    }
+.fa-up-down-left-right {
+    cursor: grab;
+    position: relative;
+    top: 15px;
+    right: -5px; 
+    color: #0d6efd;
+}
+
+.tree-header {
+    /*margin: 5px 0 0 0;*/
+    /*font-weight: normal;*/
+    /*padding: 6px 10px 6px 15px;*/
+    /*font-size: 1rem;*/
+    /*-webkit-user-select: none;*/
+    /*color: white !important;*/
+    /*border-radius: 2px;*/
+    /*margin-top: 10px;*/
+    /*margin-bottom: 10px;*/
+    /*box-shadow: 0px 0px 0px 2px #616900;*/  
+}
+
+
+
+.ui-sortable-placeholder {
+    border: 2px dashed blue;
+    background-color: lightsteelblue !important;
+    min-width: 100% !important;
+    height: 45px;
+}
+
+ 
+
+.node-handle {
+    position: absolute;
+    top: 8px;
+    left: 22px;
+    transform: scale(1.7);
+    cursor: move;
+    color: green !important;
+}
+.tree-node {
+    position: relative;
+    list-style-type: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    top: 0px;
+    margin-top: 0px;
+    max-height: 100% !important;
+    width: 100%;
+    background: #cfd8ce;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    -webkit-user-select: none;
+}
+
+    .tree-node > .tree-node-header {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        height: 40px;
+        width: 400px;
+        background-color: #dfe7e2;
+        border-radius: 2px;
+        box-shadow: 0 0 2px 2px darkgray;
+        overflow-x: hidden;
+        line-height: 0;
+        cursor: alias;
+    }
+
+        .tree-node > .tree-node-header > .tree-node-header-label {
+            height: auto;
+            justify-content: space-between !important;
+            flex-wrap: wrap !important;
+            display: flex !important;
+            font-size: 0.9rem;
+            padding: 8px 28px;
+        }
+
+            .tree-node > .tree-node-header > .tree-node-header-label > div {
+                width: max-content;
+                height: max-content;
+                align-self: center !important;
+            }
+
+
+
+        .tree-node > .tree-node-header:hover {
+            /*background-color: #99CD3D;*/
+            background-color: aliceblue !important;
+            transition: background-color 0.15s ease;
+        }
+
+.ui-sortable-helper .tree-node-header {
+    cursor: move;
+}
+
+.tree-node[visible="false"] > .tree-node-header {
+    background-color: white !important;
+    box-shadow: 0px 0px 2px 2px darkgray;
+}
+
+    .tree-node[visible="false"] > .tree-node-header:hover {
+        background-color: aliceblue !important;
+    }
+
+.tree-node[isexternal="true"] > .tree-node-header {
+     /*border: 2px dashed ghostwhite;*/
+    box-shadow: 0px 0px 2px 2px #d50660;
+    color: #d50660 !important;
+    text-shadow: 0px 0px 6px white;
+}
+
+
+
+.space {
+    position: relative;
+    list-style-type: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    margin-left: 70px;
+    width: 60px;
+    top: 15px;
+    padding-bottom: 15px;
+    height: 100%;
+}
+
+.first-space {
+    margin-left: 0px;
+}
+
+#new-node-btn{
+    cursor:pointer;
+}
+

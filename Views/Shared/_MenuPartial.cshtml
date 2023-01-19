@@ -1,0 +1,35 @@
+﻿@model List<WebApp.Models.NavigationMenuNode> 
+
+
+@{
+    var expandNode = ViewData["expandNode"] ?? "active";
+    ViewData["expandNode"] = "";
+}
+
+@foreach (var item in Model)
+{
+    if (!string.IsNullOrWhiteSpace(item.Node.ControllerName))
+    {
+        <li>
+            <a asp-controller="@item.Node.ControllerName" asp-action="@item.Node.ActionName" class="dropdown-item">@item.Node.Name</a>
+        </li>
+    }
+    else if (item.Node.IsExternal && !string.IsNullOrWhiteSpace(item.Node.ExternalUrl))
+    {
+        <li>
+            <a target="_blank" href="@item.Node.ExternalUrl" class="dropdown-item">@item.Node.Name</a>
+        </li>
+    }
+
+    var children = item.Children.Where(x => x.Node.Visible).ToList();
+    if (children.Any())
+    {
+        <li>
+            <a href="#" class="dropdown-item dropdown-toggle">@item.Node.Name</a>
+            <ul class="submenu dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                @Html.Partial("_MenuPartial", children)
+            </ul>
+        </li>
+    }
+    expandNode = "";
+}

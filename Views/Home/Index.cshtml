@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "WEBAPP_NAME";
+}
+
+<style>
+    html {
+        background-image: url(@Url.Content(@"~/img/Pessoas.webp")) !important;
+        z-index: -1;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+    }
+
+
+    body {
+        color: white;
+        background-color: rgba(0, 0, 0, 0) !important;
+    }
+
+    .tile_stl {
+        margin-top: 30px;
+        border-radius: 10px;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+    }
+
+
+    .back_1 {
+        background: linear-gradient( 181deg, #413f3fe8, #00000059);
+    }
+ 
+</style>
+
+
+<div class="col-md-12 d-flex flex-wrap align-items-md-center tile_stl back_1 ">
+    <div class="text-justify col-md-11 mt-4 mb-4 container-fluid">
+        <h2>
+            <strong>
+                Bem vindo ao WEBAPP_NAME
+            </strong>
+        </h2>
+        <hr />
+        <h6>
+            Este portal destina-se a efetuar o registo de tarefas que contribuem para a diretiva estratégica do Exército Português.
+        </h6>
+        <hr />
+        @{
+            if(ViewBag.NumeroTarefas != null) {
+                <a href="~/Tarefas">
+                    <button type="button" class="btn btn-success">
+                      Nº Tarefas Existentes <span class="badge bg-light text-dark">@ViewBag.NumeroTarefas</span>
+                    </button>
+                </a>
+            }
+        }
+    </div>
+</div>
+ 

@@ -1,0 +1,77 @@
+﻿@model WebApp.Models.RoleViewModel
+
+@{
+
+    ViewData["ActivePage"] = "EditRolePermissions";
+    Layout = "_LayoutRole";
+}
+ 
+ 
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="Name"/>
+            <strong>@Html.DisplayNameFor(model => model.Permissions) :</strong><hr/>
+            <div class="form-group">
+
+                <ul>
+                    @{
+
+                        Stack<Guid?> myStack = new Stack<Guid?>();
+
+                        myStack.Push(null);
+                        for (var i = 0; i < Model.Permissions.Length; i++)
+                        {
+                            if (Model.Permissions[i].ParentMenuId != myStack.Peek())
+                            {
+                                if (!myStack.Contains(Model.Permissions[i].ParentMenuId))
+                                {
+                                    @Html.Raw("<ul>")
+                                    myStack.Push(Model.Permissions[i].ParentMenuId);
+                                }
+                                else
+                                {
+                                    do
+                                    {
+                                        @Html.Raw("</ul>")
+                                        myStack.Pop();
+                                    } while (myStack.Peek() != Model.Permissions[i].ParentMenuId);
+                                }
+                            }
+
+                            <li class="permissions-line">
+
+                                <input style="margin-left:2px;" class="check-get" type="checkbox" asp-for="@Model.Permissions[i].NoNullGet"/>
+                                <label style="margin-left:5px;" asp-for="@Model.Permissions[i].NoNullGet"> @Html.DisplayNameFor(model => Model.Permissions[i].Get)</label>
+                                <input style="margin-left:12px;" class="check-post" type="checkbox" asp-for="@Model.Permissions[i].NoNullPost"/>
+                                <label style="margin-left:5px;" asp-for="@Model.Permissions[i].NoNullPost">@Html.DisplayNameFor(model => Model.Permissions[i].Post)</label>
+                                <label class="txt-btn modal-link" style="margin-left:10px;" title="Detalhes do menu @Model.Permissions[i].Name" url='@Url.Content("~/Admin/ViewMenu")/@Model.Permissions[i].Id' >@Model.Permissions[i].Name</label>
+                                <input type="hidden" asp-for="@Model.Permissions[i].Id"/>
+                                <input type="hidden" asp-for="@Model.Permissions[i].Name"/>
+                                <input type="hidden" asp-for="@Model.Permissions[i].ParentMenuId"/>
+
+                            </li>
+                        }
+                        while (myStack.Peek() != null)
+                        {
+                            @Html.Raw("</ul>")
+                            myStack.Pop();
+                        }
+                    }
+                </ul>
+            </div>
+            <hr/>
+            <div class="form-group form-btns">
+                <input type="submit" value="Guardar" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+<div>
+    <a class="btn btn-secondary" asp-action="Roles">Voltar</a>
+</div>
+
+ 

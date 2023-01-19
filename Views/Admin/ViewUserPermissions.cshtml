@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WebApp.Models.RolePermission>
+
+@{
+    Layout = null;
+}
+
+<link href="~/css/modal-link.css" rel="stylesheet"/>
+<div id="dlg-cont-html" class="form-group">
+
+    <ul>
+        @{
+            Stack<Guid?> myStack = new Stack<Guid?>();
+
+            myStack.Push(null);
+            foreach (var item in Model)
+            {
+                if (item.ParentMenuId != myStack.Peek())
+                {
+                    if (!myStack.Contains(item.ParentMenuId))
+                    {
+                        @Html.Raw("<ul>")
+                        myStack.Push(item.ParentMenuId);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            @Html.Raw("</ul>")
+                            myStack.Pop();
+                        } while (myStack.Peek() != item.ParentMenuId);
+                    }
+                }
+
+                <li class="permissions-line">
+
+                    <input class="check-readonly check-get" style="margin-left:2px;" type="checkbox" asp-for="@item.Get"/>
+                    <label style="margin-left:5px;" asp-for="@item.Get">@Html.DisplayNameFor(item => item.Get)</label>
+                    <input class="check-readonly check-post" style="margin-left:12px;" type="checkbox" asp-for="@item.Post"/>
+                    <label style="margin-left:5px;" asp-for="@item.Post">@Html.DisplayNameFor(item => item.Post)</label>
+                    <label class="txt-btn modal-link" style="margin-left:10px;" title="Detalhes do menu @item.Name" url='@Url.Content("~/Admin/ViewMenu")/@item.Id' >@item.Name</label>
+                    
+                </li>
+            }
+            while (myStack.Peek() != null)
+            {
+                @Html.Raw("</ul>")
+                myStack.Pop();
+            }
+        }
+    </ul>
+</div>
+
+
+<script>
+$(document).ready(function () {
+    
+    $("#dlg-cont-html .check-readonly").click( function () { return false})
+    
+    });    
+applyModalClickEvents("#dlg-cont-html");
+
+</script>
