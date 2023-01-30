@@ -81,6 +81,14 @@
                                 <input type="text" class="flex-fill" data-val="true" data-val-length="A área tem até 250 caracteres" data-val-length-max="250" data-val-regex="Utilize apenas alfanuméricos" data-val-regex-pattern="^[a-z,A-Z,0-9]*$" id="edt-ExternalUrl" maxlength="250" name="edt-ExternalUrl" />
                             </td>
                         </tr>
+                        <tr>
+                            <td class="font-weight-bold">
+                                Não é uma Action ou um controller (ex: menu de organização)
+                            </td>
+                            <td class="col-md-12 d-flex ">
+                                <input type="checkbox" id="edt-NotAnActionOrController" name="edt-NotAnActionOrController" style=" margin: 8px;" />
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -113,12 +121,10 @@
         </div>*@
 
 </div>
-
 <hr />
 <div class="row">
 </div>
 <div class="row d-flex justify-content-around">
-
     <form method="post" style="width:100%;">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Menus" class="form-control" />
@@ -130,7 +136,6 @@
 
         </div>
     </form>
-
 </div>
 
  

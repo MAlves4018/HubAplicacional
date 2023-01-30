@@ -252,6 +252,7 @@ $(function () {
         $("#edt-ExternalUrl").val(item["ExternalUrl"]);
         $("#edt-Visible").prop("checked", item["Visible"]); //$('#textbox1').val(this.checked)
         $("#edt-IsExternal").prop("checked", item["IsExternal"]);
+        $("#edt-NotAnActionOrController").prop("checked", item["NotAnActionOrController"]);
     })
 
 
@@ -266,6 +267,7 @@ $(function () {
         itemdata["ExternalUrl"] = $("#edt-ExternalUrl").val();
         itemdata["Visible"] = $("#edt-Visible").is(':checked');
         itemdata["IsExternal"] = $("#edt-IsExternal").is(':checked');
+        itemdata["NotAnActionOrController"] = $("#edt-NotAnActionOrController").is(':checked');
 
         tree.renderNode(item);
     });

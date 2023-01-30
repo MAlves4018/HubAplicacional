@@ -9274,9 +9274,6 @@ li.select2-results__option--selected {
 table.dataTable tr td:last-child {
   text-align: center;
 }
-.dataTables_length {
-  margin-top: 20px;
-}
 .navbar-nav {
   cursor: pointer;
 }
@@ -9293,17 +9290,16 @@ li.nav-item {
 .fa-circle-xmark {
   color: #b02a37;
 }
-table {
-  width: auto !important;
+table.dataTable {
+  width: 100% !important;
 }
-
-
-/* used to mark items that call the modal dialog to display a page */
-.modal-link:hover{
-  
-    color: white;
-    /*background-color: #5a785e;*/
-    box-shadow: 0 0 3px 2px #28a745
+.crud-icon {
+  transform: scale(1.5);
+  margin: 0 10px 0 0;
+  cursor: pointer;
+}
+.crud-icon:hover {
+  filter: saturate(0.3);
 }
 
 

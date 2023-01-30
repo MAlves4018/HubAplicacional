@@ -1,15 +1,22 @@
 ﻿@model WebApp.Models.UserViewModel
 
-
 @{
-
-    ViewData["ActivePage"] = "DeleteUser";
-    Layout = "_LayoutUser";
+    var pageId = "dlg-cont-user";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false) )
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "ViewUser";
+        Layout = "_LayoutUser";
+        pageId = "dlg-cont-user-p";
+    }
 }
 
 <div class="row">
     <div class="col-md-12">
-        <form method="post">
+        <form method="post" asp-controller="Admin" asp-action="DeleteUser">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id"/>
             
@@ -31,8 +38,8 @@
         </form>
     </div>
 </div>
-<hr/>
+@*<hr/>
 <div>
     <a class="btn btn-secondary" asp-action="Users">Voltar</a>
-</div>
+</div>*@
  

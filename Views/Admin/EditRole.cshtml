@@ -1,15 +1,22 @@
 ﻿@model WebApp.Models.RoleViewModel
 
 @{
-
-    ViewData["ActivePage"] = "EditRole";
-    Layout = "_LayoutRole";
+    var pageId = "dlg-cont-user";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "EditRole";
+        Layout = "_LayoutRole";
+        pageId = "dlg-cont-user-p";
+    }
 }
-
 
 <div class="row">
     <div class="col-md-12">
-        <form method="post">
+        <form method="post" asp-controller="Admin">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id"/>
             <div class="form-group">
@@ -19,7 +26,7 @@
               
                 <input asp-for="Name" class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
-                  <hr/>
+                <br/>
             </div>
            
             
@@ -29,10 +36,10 @@
         </form>
     </div>
 </div>
-<hr/>
+@*<hr/>
 <div>
     <a class="btn btn-secondary" asp-action="Roles">Voltar</a>
-</div>
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

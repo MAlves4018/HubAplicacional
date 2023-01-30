@@ -69,16 +69,30 @@ namespace WebApp.Data
                 SecurityStamp = "4Y6BSSJXKUHFGAEMVEUWL3XH3DEGUTRF",
                 ConcurrencyStamp = "21a41ca8-d2e3-46ac-b53f-925edccd1eb7",
             };
+            var adminUser3 = new ApplicationUser() /* password is "P@ssw0rd" */
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "03642512",
+                NormalizedUserName = "03642512",
+                Email = "batista.cds@exercito.pt",
+                NormalizedEmail = "batista.cds@exercito.pt",
+                EmailConfirmed = true,
+                PasswordHash =
+                  "AQAFGTEAACcQAAAAEKYfUQJgm2Shlb0Y27ObJK4ttO3dSheYpae6UCcL084qro1IcPBDyBtgg1LYb2uCzw==",
+                SecurityStamp = "4Y6BSSJXKUHFGAEMVEUWL3XH3DEGUTRF",
+                ConcurrencyStamp = "21a41ca8-d2e3-46ac-b53f-925edccd1eb7",
+            };
 
             var adminRole = new IdentityRole {Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "Admin"};
             builder.Entity<IdentityRole>().HasData(adminRole);
 
 
-            builder.Entity<ApplicationUser>().HasData(adminUser, adminUser2);
+            builder.Entity<ApplicationUser>().HasData(adminUser, adminUser2, adminUser3);
              
             builder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string>() { UserId = adminUser.Id, RoleId = adminRole.Id },
-                new IdentityUserRole<string>() { UserId = adminUser2.Id, RoleId = adminRole.Id }
+                new IdentityUserRole<string>() { UserId = adminUser2.Id, RoleId = adminRole.Id },
+                new IdentityUserRole<string>() { UserId = adminUser3.Id, RoleId = adminRole.Id }
             );
 
 
@@ -89,7 +103,7 @@ namespace WebApp.Data
                 {
                     Id = adminMenuId,
                     Name = "Admin",
-                    ControllerName = "",
+                    ControllerName = "Admin",
                     ActionName = "",
                     ParentMenuId = null,
                     DisplayOrder = 1,
@@ -98,18 +112,7 @@ namespace WebApp.Data
                 new NavigationMenu()
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Ver Perfils",
-                    ControllerName = "Admin",
-                    ActionName = "Roles",
-                    ParentMenuId = adminMenuId,
-                    DisplayOrder = 1,
-                    Visible = true,
-                },
-
-                new NavigationMenu()
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Ver Utilizadores",
+                    Name = "Utilizadores",
                     ControllerName = "Admin",
                     ActionName = "Users",
                     ParentMenuId = adminMenuId,
@@ -119,52 +122,22 @@ namespace WebApp.Data
                 new NavigationMenu()
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Editar menus",
+                    Name = "Perfils",
+                    ControllerName = "Admin",
+                    ActionName = "Roles",
+                    ParentMenuId = adminMenuId,
+                    DisplayOrder = 1,
+                    Visible = true,
+                },
+                new NavigationMenu()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Menus",
                     ControllerName = "Admin",
                     ActionName = "Menus",
                     ParentMenuId = adminMenuId,
                     DisplayOrder = 3,
                     Visible = true,
-                },
-                new NavigationMenu()
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Criar Perfil",
-                    ControllerName = "Admin",
-                    ActionName = "CreateRole",
-                    ParentMenuId = adminMenuId,
-                    DisplayOrder = 4,
-                    Visible = true,
-                },
-                new NavigationMenu()
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Editar Perfil",
-                    ControllerName = "Admin",
-                    ActionName = "EditRole",
-                    ParentMenuId = adminMenuId,
-                    DisplayOrder = 5,
-                    Visible = false,
-                },
-                new NavigationMenu()
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Criar Utilizador",
-                    ControllerName = "Admin",
-                    ActionName = "CreateUser",
-                    ParentMenuId = adminMenuId,
-                    DisplayOrder = 6,
-                    Visible = true,
-                },
-                new NavigationMenu()
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Editar Utilizador",
-                    ControllerName = "Admin",
-                    ActionName = "EditUser",
-                    ParentMenuId = adminMenuId,
-                    DisplayOrder = 7,
-                    Visible = false,
                 }
             };
 

@@ -336,10 +336,6 @@ li.select2-results__option--selected {
 table.dataTable tr td:last-child {
     text-align: center;
 }
-.dataTables_length {
-    margin-top: 20px;
-}
-
 
 .navbar-nav { 
     cursor: pointer;
@@ -362,7 +358,16 @@ li.nav-item {
 .fa-circle-xmark {
     color: #b02a37;
 }
+table.dataTable {
+    width: 100% !important;
+}
 
-table {
-    width: auto !important;
+.crud-icon {
+    transform: scale(1.5);
+    margin: 0 10px 0 0;
+    cursor: pointer;
+
+    &:hover {
+        filter: saturate(0.3);
+    }
 }

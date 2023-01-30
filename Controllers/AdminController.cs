@@ -129,7 +129,6 @@ namespace WebApp.Controllers
             return View(viewModel);
         }
 
-
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> EditRoleMembers(RoleViewModel viewModel)
@@ -171,10 +170,9 @@ namespace WebApp.Controllers
 
             }
 
-            return RedirectToAction(nameof(EditRoleMembers));
+            return RedirectToAction(nameof(Roles));
         }
         
-
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> EditRolePermissions(RoleViewModel viewModel)
@@ -192,7 +190,7 @@ namespace WebApp.Controllers
                 {
                     _userMessages.AddUserMessage("Editar permissões",
                         "As alterações foram guardadas com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
-                    return RedirectToAction(nameof(EditRolePermissions));
+                    return RedirectToAction(nameof(Roles));
                 }
             }
             catch (Exception e)
@@ -205,7 +203,6 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Editar Permissões de Perfil";
             return View(viewModel);
         }
-
 
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> EditRole(string id)
@@ -221,7 +218,6 @@ namespace WebApp.Controllers
             return View(viewModel);
         }
 
-
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> EditRole(RoleViewModel viewModel)
@@ -235,7 +231,7 @@ namespace WebApp.Controllers
                 {
                     _userMessages.AddUserMessage("Editar Perfil",
                         "As alterações foram guardadas com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
-                    return RedirectToAction(nameof(EditRole));
+                    return RedirectToAction(nameof(Roles));
                 }
 
                 ModelState.AddModelError("Name",
@@ -248,7 +244,6 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Editar Perfil";
             return View(viewModel);
         }
-
 
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> CreateRole()
@@ -264,7 +259,6 @@ namespace WebApp.Controllers
             return View(nameof(EditRole), viewModel);
         }
 
-
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> CreateRole(RoleViewModel viewModel)
@@ -278,7 +272,7 @@ namespace WebApp.Controllers
                 {
                     _userMessages.AddUserMessage("Criar Perfil",
                         "O Perfil foi criado com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
-                    return RedirectToAction(nameof(EditRole), new { Id=role.Id});
+                    return RedirectToAction(nameof(Roles), new { Id=role.Id});
                 }
 
                 ModelState.AddModelError("Name",
@@ -286,10 +280,9 @@ namespace WebApp.Controllers
             }
 
             ViewData["Title"] = "Criar Novo Perfil";
-            return View(nameof(EditRole), viewModel);
+            return View(nameof(Roles), viewModel);
         }
         
-
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> DeleteRole(string id)
         {
@@ -304,7 +297,6 @@ namespace WebApp.Controllers
             return View(viewModel);
         }
         
-
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> DeleteRole(RoleViewModel viewModel)
@@ -333,7 +325,6 @@ namespace WebApp.Controllers
             return RedirectToAction(nameof(Roles));
         }
 
-
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> Users()
         {
@@ -355,7 +346,6 @@ namespace WebApp.Controllers
 
             return View(users);
         }
-
 
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> ViewUser(string Id, bool p)
@@ -386,7 +376,6 @@ namespace WebApp.Controllers
             ViewData["useLayout"] = p;
             return View(viewModel);
         }
-
 
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> EditUser(string Id)
@@ -647,26 +636,6 @@ namespace WebApp.Controllers
             return View(sortedPermissions);
         }
 
-
-        //[Authorize(Policy = DynamicPolicies.DynamicAdmin)]
-        //public async Task<IActionResult> Menus()
-        //{
-        //    //var permissions = await _context.NavigationMenus.Include(c => c.ParentNavigationMenu).ToListAsync();
-        //    var permissions = await _context.NavigationMenus.ToListAsync();
-
-        //    var treeRoot = ModelFactory.AsNavigationMenuNodeList(permissions, null);
-
-        //    var json = JsonConvert.SerializeObject(treeRoot);
-        //    var viewModel = new NavigationMenusViewModel() { Menus = json };
-
-        //    _userMessages.AddUserMessageOnce("admin/permissions/1", "Ajuda",
-        //        "Ordene os elementos arrastando o botão &emsp;<i class='bi bi-arrows-move text-warning'></i><br/><br/>Para editar faça duplo clique sobre o elemento pretendido",
-        //        IUserMessages.ErrorCode.INFO, 12000);
-
-        //    return View(viewModel);
-        //}
-
-
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         [ValidateAntiForgeryToken]
@@ -766,7 +735,6 @@ namespace WebApp.Controllers
             return View(viewModel);
         }
 
-
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> ViewMenu(string id)
         {
@@ -776,9 +744,6 @@ namespace WebApp.Controllers
 
             return View(viewModel);
         }
-
-
-
 
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> Menus()
@@ -796,9 +761,6 @@ namespace WebApp.Controllers
             return View(viewModel); 
         }
 
-
-
-         
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public List<IGrouping<string, ControllerAction>> GetControllersFromAssembly()
         {
@@ -821,8 +783,6 @@ namespace WebApp.Controllers
             return controlleractionlist;
         }
 
-
-         
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IEnumerable<NavigationMenu>> GetControllers()
         {
@@ -894,7 +854,6 @@ namespace WebApp.Controllers
             return navMenuDB;
         }
 
-
         private async Task<List<NavigationMenu>> RemoveNotIncludedMenus(List<NavigationMenu> navMenuDB, List<IGrouping<string, ControllerAction>> controlleractionlist)
         {
 
@@ -902,9 +861,10 @@ namespace WebApp.Controllers
             foreach (var controller in navMenuDBList)
             {
                 //se nao existir um controller
-                string controllerName = controller.Node.Name + "Controller";
+                string controllerName = controller.Node.ControllerName + "Controller";
                 if (!controlleractionlist.Exists(x => x.Key == controllerName))
                 {
+                    if (controller.Node.NotAnActionOrController || controller.Node.IsExternal) { continue; }
                     var controllerToDelete = await _context.NavigationMenus.FindAsync(controller.Node.Id);
                     var listToDelete = await _context.NavigationMenus.Where(x => x.ParentMenuId == controllerToDelete.Id).ToListAsync();
                     _context.NavigationMenus.RemoveRange(listToDelete);
@@ -917,7 +877,8 @@ namespace WebApp.Controllers
                 {
                     foreach (var action in controller.Children)
                     {
-                        if (!controlleractionlist.First(k => k.Key == controllerName).Any(x => x.Action == action.Node.Name))
+                        if (action.Node.NotAnActionOrController || action.Node.IsExternal) { continue; }
+                        if (!controlleractionlist.First(k => k.Key == controllerName).Any(x => x.Action == action.Node.ActionName))
                         {
                             _context.NavigationMenus.Remove(new NavigationMenu { Id = action.Node.Id });
                             await _context.SaveChangesAsync(User.Identity.Name);
@@ -928,7 +889,6 @@ namespace WebApp.Controllers
             //await _context.SaveChangesAsync(User.Identity.Name);
             return await _context.NavigationMenus.AsNoTracking().ToListAsync();
         }
-
 
         public class ControllerAction
         {

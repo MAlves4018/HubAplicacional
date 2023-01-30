@@ -32,5 +32,8 @@ namespace WebApp.Models
 		[Display(Name = "Visível")]
 		public bool Visible { get; set; }
 
-	}
+        [Display(Name = "Não é uma Action ou um controller (ex: menu de organização)")]
+        public bool NotAnActionOrController { get; set; }
+
+    }
 }

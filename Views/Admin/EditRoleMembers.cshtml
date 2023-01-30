@@ -1,21 +1,27 @@
 ﻿@model WebApp.Models.RoleViewModel
 
 @{
-
-    ViewData["ActivePage"] = "EditRoleMembers";
-    Layout = "_LayoutRole";
-} 
-
+    var pageId = "dlg-cont-user";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["Act ivePage"] = "EditRoleMembers";
+        Layout = "_LayoutUser";
+        pageId = "dlg-cont-user-p";
+    }
+}
 <div class="row">
     <div class="col-md-12">
-        <form method="post">
+        <form method="post" asp-controller="Admin" asp-action="EditRoleMembers">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id"/>
             <input type="hidden" asp-for="Name"/>
             <div class="form-group">
-
-                <table class="table">
-                    <thead>
+                <table class="table table-striped">
+                    <thead class="table-dark">
                     <th>
                         @Html.DisplayNameFor(model => model.Members)
                     </th>
@@ -38,16 +44,16 @@
                 </table>
 
             </div>
-            <hr/>
+            <br/>
             <div class="form-group form-btns">
                 <input type="submit" value="Guardar" class="btn btn-primary"/>
             </div>
         </form>
     </div>
 </div>
-<hr/>
+@*<hr/>
 <div>
     <a class="btn btn-secondary" asp-action="Roles">Voltar</a>
 </div>
-
+*@
  
