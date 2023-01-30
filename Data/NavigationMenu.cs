@@ -30,5 +30,7 @@ namespace WebApp.Data
 		public int DisplayOrder { get; set; }
 
 		public bool Visible { get; set; }
-	}
+
+        public bool NotAnActionOrController { get; set; }
+    }
 }

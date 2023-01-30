@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     myModalEl.querySelector('.modal-title').innerHTML = node.getAttribute('title');
                     var myModal = new Modal(myModalEl);
                     myModal.show();
-                }).catch(error => console.log(error));  
+                }).catch(error => console.log(error));
         });
        
     });

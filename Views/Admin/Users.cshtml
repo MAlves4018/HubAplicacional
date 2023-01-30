@@ -12,8 +12,10 @@
 </style> 
 
 <h4>Utilizadores</h4>
-<table class="table">
-    <thead>
+<hr/>
+<a title="Novo utilizador" url='@Url.Content("~/Admin/CreateUser")' class="btn btn-primary mb-4 modal-link">Adicionar utilizador</a>
+<table class="table table-striped pt-4">
+    <thead class="table-dark">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -48,9 +50,9 @@
             </td>
             <td>
                 @* <a class="btn btn-outline-secondary modal-link" href="#" title="Permissões do utilizador @item.UserName" url="@Url.Content("~/Admin/ViewUserPermissions/@item.Id")">Permissões</a> *@
-                <a class="btn btn-outline-secondary modal-link small-txt" href="#" title="Ver utilizador @item.UserName" url='@Url.Content("~/Admin/ViewUser")/@item.Id'>Ver</a>
-                <a class="testBtn btn btn-outline-secondary small-txt" title="Apagar utilizador @item.UserName" asp-action="DeleteUser" asp-controller="Admin" asp-route-id="@item.Id">Apagar...</a>
-                <a class="btn btn-outline-secondary small-txt" title="Editar utilizador @item.UserName" asp-action="EditUser" asp-controller="Admin" asp-route-id="@item.Id">Editar...</a>
+                    <a class="modal-link" title="Ver utilizador @item.UserName" url='@Url.Content("~/Admin/ViewUser")/@item.Id'><i class="fa-solid fa-circle-info text-primary crud-icon"></i></a>
+                    <a class="modal-link" title="Editar utilizador @item.UserName" url='@Url.Content("~/Admin/EditUser")/@item.Id'><i class="fa-solid fa-square-pen text-success crud-icon"></i></a>
+                    <a class="modal-link" title="Apagar utilizador @item.UserName" url='@Url.Content("~/Admin/DeleteUser")/@item.Id'><i class="fa-solid fa-circle-xmark text-danger crud-icon"></i></a>
             </td>
         </tr>
     }

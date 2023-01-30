@@ -1,17 +1,23 @@
 ﻿@model WebApp.Models.UserViewModel
 @using WebApp.Models.ApplicationModels
 
-
-
 @{
-
-    ViewData["ActivePage"] = "EditUser";
-    Layout = "_LayoutUser";
+    var pageId = "dlg-cont-user";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "ViewUser";
+        Layout = "_LayoutUser";
+        pageId = "dlg-cont-user-p";
+    }
 }
 
 <div class="row">
     <div class="col-md-12">
-        <form method="post">
+        <form method="post" asp-controller="Admin">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
 
@@ -22,37 +28,13 @@
                 </label><br />
                 <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
-                <hr />
+                <br />
                 <label>
                     <strong> @Html.DisplayNameFor(model => model.Email)</strong>
                 </label><br />
                 <input asp-for="Email" class="form-control" disabled />
                 <span asp-validation-for="Email" class="text-danger"></span>
                 <hr />
-               
-                
-                <label>
-             @*       <strong>@Html.DisplayNameFor(model => model.EntidadesSetoriais)</strong>
-                </label><br />
-              
-                *@
-                
-              @*  <select id="centrosDepositos" class="select2" tabindex="5" multiple="multiple" style="width:100%" asp-for="EntidadesSetoriais">
-
-                    @foreach (EntidadesSetoriais entidadesSetoriais in (List<EntidadesSetoriais>)@ViewBag.EntidadesSetoriais)
-                    {
-                        var contains = false;
-                        if (Model.EntidadesSetoriais != null)
-                        {
-                            contains = Model.EntidadesSetoriais.Contains(entidadesSetoriais) ? true : false;
-                        }
-                        <option value="@entidadesSetoriais.Id" selected="@contains">@entidadesSetoriais.Sigla</option>
-                    }
-                    }
-                </select>*@
-
-
-
             </div>
 
             <br />
@@ -62,10 +44,10 @@
         </form>
     </div>
 </div>
-<hr />
+@*<hr />
 <div>
     <a class="btn btn-secondary" asp-action="Users">Voltar</a>
-</div>
+</div>*@
 @section Scripts {
 <script>
 </script>

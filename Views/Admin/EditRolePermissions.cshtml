@@ -1,26 +1,52 @@
 ﻿@model WebApp.Models.RoleViewModel
 
-@{
-
-    ViewData["ActivePage"] = "EditRolePermissions";
-    Layout = "_LayoutRole";
+ @{
+    var pageId = "dlg-cont-user";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["Act ivePage"] = "EditRolePermissions";
+        Layout = "_LayoutUser";
+        pageId = "dlg-cont-user-p";
+    }
 }
- 
  
 <div class="row">
     <div class="col-md-12">
-        <form method="post">
+        <form method="post" asp-controller="Admin" asp-action="EditRolePermissions">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id"/>
             <input type="hidden" asp-for="Name"/>
-            <strong>@Html.DisplayNameFor(model => model.Permissions) :</strong><hr/>
-            <div class="form-group">
+@*            <strong>@Html.DisplayNameFor(model => model.Permissions) :</strong><hr/>
+*@
+            <div class="row p-3 fw-bold mb-0 pb-0">
+                <div class="col-4">
+                    <input type="checkbox" id="select-all-read" />
+                    <label for="select-all-read" class="ms-2">Selecionar Tudo Ler</label>
+                </div>
 
+                <div class="col-4">
+                    <input type="checkbox" id="select-all-write"/>
+                    <label for="select-all-write" class="ms-2">Selecionar Tudo Escrever</label>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass" style="height: 25px;"></i></span>
+                      </div>
+                      <input id="search-roles" type="text" class="form-control" placeholder="Pequisa..." aria-label="pesquisa" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
                 <ul>
                     @{
-
                         Stack<Guid?> myStack = new Stack<Guid?>();
-
                         myStack.Push(null);
                         for (var i = 0; i < Model.Permissions.Length; i++)
                         {
@@ -40,14 +66,12 @@
                                     } while (myStack.Peek() != Model.Permissions[i].ParentMenuId);
                                 }
                             }
-
                             <li class="permissions-line">
-
                                 <input style="margin-left:2px;" class="check-get" type="checkbox" asp-for="@Model.Permissions[i].NoNullGet"/>
                                 <label style="margin-left:5px;" asp-for="@Model.Permissions[i].NoNullGet"> @Html.DisplayNameFor(model => Model.Permissions[i].Get)</label>
                                 <input style="margin-left:12px;" class="check-post" type="checkbox" asp-for="@Model.Permissions[i].NoNullPost"/>
                                 <label style="margin-left:5px;" asp-for="@Model.Permissions[i].NoNullPost">@Html.DisplayNameFor(model => Model.Permissions[i].Post)</label>
-                                <label class="txt-btn modal-link" style="margin-left:10px;" title="Detalhes do menu @Model.Permissions[i].Name" url='@Url.Content("~/Admin/ViewMenu")/@Model.Permissions[i].Id' >@Model.Permissions[i].Name</label>
+                                <label class="txt-btn role-title modal-link" style="margin-left:10px;" title="Detalhes do menu @Model.Permissions[i].Name" url='@Url.Content("~/Admin/ViewMenu")/@Model.Permissions[i].Id' >@Model.Permissions[i].Name</label>
                                 <input type="hidden" asp-for="@Model.Permissions[i].Id"/>
                                 <input type="hidden" asp-for="@Model.Permissions[i].Name"/>
                                 <input type="hidden" asp-for="@Model.Permissions[i].ParentMenuId"/>
@@ -69,9 +93,7 @@
         </form>
     </div>
 </div>
-<hr/>
+@*<hr/>
 <div>
     <a class="btn btn-secondary" asp-action="Roles">Voltar</a>
-</div>
-
- 
+</div>*@

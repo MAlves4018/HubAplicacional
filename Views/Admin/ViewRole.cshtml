@@ -13,10 +13,6 @@
         pageId = "dlg-cont-role-p";
     }
 }
-
- 
-<style> .btn{padding: .1rem .3rem; margin: 2px 1px 3px 1px;} </style>
-
 <div id="@pageId" class="form-group d-flex flex-wrap" style="display:flex!important;">
     <div class="col-md-3" style="margin-top: 20px">
         <strong>@Html.DisplayNameFor(model => model.Members)</strong>
@@ -35,7 +31,6 @@
             @{
 
                 Stack<Guid?> myStack = new Stack<Guid?>();
-
                 myStack.Push(null);
                 for (var i = 0; i < Model.Permissions.Length; i++)
                 {
@@ -58,9 +53,9 @@
 
                     <li class="permissions-line">
 
-                        <input class="check-readonly check-get " style="margin-left:2px;" type="checkbox" asp-for="@Model.Permissions[i].Get.Value"/>
+                        <input class="check-readonly check-get " style="margin-left:2px;" type="checkbox" disabled asp-for="@Model.Permissions[i].Get.Value"/>
                         <label style="margin-left:5px;" asp-for="@Model.Permissions[i].Get.Value"> @Html.DisplayNameFor(model => Model.Permissions[i].Get)</label>
-                        <input class="check-readonly check-post" style="margin-left:12px;" type="checkbox" asp-for="@Model.Permissions[i].Post.Value"/>
+                        <input class="check-readonly check-post" style="margin-left:12px;" type="checkbox" disabled asp-for="@Model.Permissions[i].Post.Value" />
                         <label style="margin-left:5px;" asp-for="@Model.Permissions[i].Post.Value">@Html.DisplayNameFor(model => Model.Permissions[i].Post)</label>
                         <label class="txt-btn modal-link" style="margin-left:10px;" title="Detalhes do menu @Model.Permissions[i].Name" url='@Url.Content("~/Admin/ViewMenu")/@Model.Permissions[i].Id'>@Model.Permissions[i].Name</label>
 
@@ -80,9 +75,9 @@
 
 @if (Layout == null)
 {
-    <div class="form-group">
+@*    <div class="form-group">
         <a class="btn btn-outline-secondary" asp-action="EditRole" asp-controller="Admin" asp-route-id="@Model.Id">Editar Perfil @Model.Name</a>
-    </div>
+    </div>*@
     <script>
         $(document).ready(function () {
             $("#@pageId .check-readonly").click( function () { return false})
@@ -99,9 +94,10 @@ else
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} 
         <script>
-             $(document).ready(function () {                     
-                 $("#@pageId .check-readonly").click( function () { return false})
-                 });    
+            $(document).ready(function () {                     
+                $("#@pageId .check-readonly").click( function () { return false})
+            });
+
              applyModalClickEvents("#@pageId");
         </script>
     }

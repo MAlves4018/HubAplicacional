@@ -1,9 +1,1 @@
 ﻿
-/* used to mark items that call the modal dialog to display a page */
-.modal-link:hover{
-  
-    color: white;
-    /*background-color: #5a785e;*/
-    box-shadow: 0 0 3px 2px #28a745
-}
-

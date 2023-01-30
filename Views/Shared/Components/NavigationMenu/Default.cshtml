@@ -44,28 +44,31 @@
         @*Level one Menu items will have null parent id *@
         @foreach (var item in Model.Where(x => x.Node.Visible).ToList())
         {
-            if (!string.IsNullOrWhiteSpace(item.Node.ControllerName))
-            {
-                <li class="nav-item active">
-                    <a class="nav-link text"  asp-controller="@item.Node.ControllerName" asp-action="@item.Node.ActionName">@item.Node.Name</a>
-                </li>
-            }
-            else if (item.Node.IsExternal && !string.IsNullOrWhiteSpace(item.Node.ExternalUrl))
-            {
-                <li class="nav-item active">
-                    <a target="_blank" class="nav-link text" href="@item.Node.ExternalUrl">@item.Node.Name</a>
-                </li>
-            }
             var children = item.Children.Where(x => x.Node.Visible).ToList();
-
             if (children.Any())
             {
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" aria-haspopup="true" role="button" data-bs-toggle="dropdown" aria-expanded="false">@item.Node.Name</a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-            @Html.Partial("_MenuPartial", children)
-        </ul>
-    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" aria-haspopup="true" role="button" data-bs-toggle="dropdown" aria-expanded="false">@item.Node.Name</a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        @Html.Partial("_MenuPartial", children)
+                    </ul>
+                </li>
+            }
+            else
+            {
+
+                if (!string.IsNullOrWhiteSpace(item.Node.ControllerName))
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link text" asp-controller="@item.Node.ControllerName" asp-action="@item.Node.ActionName">@item.Node.Name</a>
+                    </li>
+                }
+                else if (item.Node.IsExternal && !string.IsNullOrWhiteSpace(item.Node.ExternalUrl))
+                {
+                    <li class="nav-item active">
+                        <a target="_blank" class="nav-link text" href="@item.Node.ExternalUrl">@item.Node.Name</a>
+                    </li>
+                }
             }
         }
 

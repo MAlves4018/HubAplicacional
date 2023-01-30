@@ -1,25 +1,29 @@
 ﻿@model WebApp.Models.RoleViewModel
 
 @{
-
-    ViewData["ActivePage"] = "DeleteRole";
-    Layout = "_LayoutRole";
+    var pageId = "dlg-cont-user";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "DeleteRole";
+        Layout = "_LayoutRole";
+        pageId = "dlg-cont-user-p";
+    }
 }
-
 
 <div class="row">
     <div class="col-md-12">
-        <form method="post">
+        <form method="post" asp-controller="Admin">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id"/>
             <div class="form-group">
 
                 <div class="alert alert-danger">
                     <p>
-                        <strong>Quer apagar o Perfil :</strong>
-                    </p>
-                    <p>
-                        <strong class="text-yellow">@Model.Name ?</strong>
+                        <strong>Quer apagar o Perfil @Model.Name?</strong>
                     </p>
                 </div>
              
@@ -32,8 +36,8 @@
         </form>
     </div>
 </div>
-<hr/>
+@*<hr/>
 <div>
     <a class="btn btn-secondary" asp-action="Roles">Voltar</a>
 </div>
- 
+ *@

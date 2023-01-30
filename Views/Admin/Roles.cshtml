@@ -12,9 +12,9 @@
 </style> 
 
 <h4>@ViewData["Title"]</h4>
-
-<table class="table">
-	<thead>
+<a title="Novo perfil" url='@Url.Content("~/Admin/CreateRole")' class="btn btn-primary mb-4 modal-link">Adicionar perfil</a>
+<table class="table table-striped pt-4">
+	<thead class="table-dark">
 	<tr>
 		<th>
 			@Html.DisplayNameFor(model => model.Name)
@@ -31,13 +31,65 @@
 				@Html.DisplayFor(modelItem => item.Name)
 			</td>
 			<td>
-				<a class="btn btn-outline-secondary modal-link small-txt" href="#" title="Ver Perfil @item.Name" url='@Url.Content("~/Admin/ViewRole")/@item.Id' >Ver </a>
-				<a class="btn btn-outline-secondary small-txt"  asp-action="DeleteRole" asp-controller="Admin" asp-route-id="@item.Id">Apagar...</a>
-				<a class="btn btn-outline-secondary small-txt" asp-action="EditRole" asp-controller="Admin" asp-route-id="@item.Id">Editar...</a>
-			</td>
+				<a class="modal-link" title="Ver perfil @item.Name" url='@Url.Content("~/Admin/ViewRole")/@item.Id'><i class="fa-solid fa-circle-info text-primary crud-icon"></i></a>
+				<a class="modal-link" title="Editar perfil @item.Name" url='@Url.Content("~/Admin/EditRole")/@item.Id'><i class="fa-solid fa-square-pen text-success crud-icon"></i></a>
+				<a class="modal-link" title="Apagar perfil @item.Name" url='@Url.Content("~/Admin/DeleteRole")/@item.Id'><i class="fa-solid fa-circle-xmark text-danger crud-icon"></i></a>
+				<a class="modal-link" title="Editar utilizadores perfil @item.Name" url='@Url.Content("~/Admin/EditRoleMembers")/@item.Id'><i class="fa-solid fa-users text-warning crud-icon"></i></a>
+				<a class="modal-link role-permissions" title="Editar permissões perfil @item.Name" url='@Url.Content("~/Admin/EditRolePermissions")/@item.Id'><i class="fa-solid fa-user-shield text-secondary crud-icon"></i></a>
+            </td>
 		</tr>
 	}
 	</tbody>
 </table>
 
- 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener('DOMContentLoaded', (ev) => {
+            const body = document.querySelector('body');
+            body.addEventListener('click', event => {
+                if (event.target.matches('#select-all-read')) {
+                    if (event.target.checked) {
+                        document.querySelectorAll('.check-get').forEach((el) => {
+                            el.checked = true;
+                        });
+                    } else {
+                        document.querySelectorAll('.check-get').forEach((el) => {
+                            el.checked = false;
+                        });
+                    }
+                } else if (event.target.matches('#select-all-write')) {
+                    if (event.target.checked) {
+                        document.querySelectorAll('.check-post').forEach((el) => {
+                            el.checked = true;
+                        });
+                    } else {
+                        document.querySelectorAll('.check-post').forEach((el) => {
+                            el.checked = false;
+                        });
+                    }
+                }
+            });
+            body.addEventListener('keyup', event => {
+                if (event.target.matches('#search-roles')) {
+                    if (event.target.value) {
+                        document.querySelectorAll('.role-title').forEach(el => {
+                            if (el.innerText.includes(event.target.value)) {
+                                el.parentElement.style = "display: block";
+                            } else {
+                                el.parentElement.style = "display: none";
+                            }
+                        });
+                    } else {
+                        document.querySelectorAll('.role-title').forEach(el => {
+                                el.parentElement.style = "display: block";
+                        });
+                    }
+                }
+            });
+
+        });
+    </script>
+}

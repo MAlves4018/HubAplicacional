@@ -16,7 +16,7 @@ namespace WebApp.Models
                 var x = node.Node;
                 itemList.Add(new NavigationMenu() { Id =  x.Id, Name = x.Name, ControllerName=x.ControllerName, 
                     ActionName=x.ActionName, DisplayOrder=x.DisplayOrder, ExternalUrl=x.ExternalUrl, IsExternal=x.IsExternal, 
-                    ParentMenuId=x.ParentMenuId, Visible=x.Visible} );
+                    ParentMenuId=x.ParentMenuId, Visible=x.Visible, NotAnActionOrController=x.NotAnActionOrController} );
                 itemList.AddRange(AsNavigationMenuList(node.Children));
             }
 
@@ -38,7 +38,8 @@ namespace WebApp.Models
                             ExternalUrl = x.ExternalUrl,
                             IsExternal = x.IsExternal,
                             ParentMenuId = x.ParentMenuId,
-                            Visible = x.Visible
+                            Visible = x.Visible,
+                            NotAnActionOrController = x.NotAnActionOrController
                         },
                         Children = AsNavigationMenuNodeList(permissions, x.Id)
                     })
