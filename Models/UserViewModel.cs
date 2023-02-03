@@ -31,7 +31,5 @@ namespace WebApp.Models
         
         [Display(Name = "Permissões")]
         public RolePermission[]? Permissions { get; set; }
-        [Display(Name = "Entidades Setoriais")]
-        public  Unidade? Unidade { get; set; }
     }
 }

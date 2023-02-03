@@ -14,9 +14,6 @@ namespace WebApp.Models.ApplicationModels
         public ICollection<Alertas> Alertas { get; set; }
 
         public ICollection<UserRolesViewModel>? Roles { get; set; }
-
-        [PersonalData]
-        public Unidade Unidade { get; set; }
         public int? UnidadeId { get; set; }
 
 

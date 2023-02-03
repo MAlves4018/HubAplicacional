@@ -12,7 +12,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      //"launchUrl": "WEBAPP_NAME",
+      //"launchUrl": "HubAplicacional",
       "applicationUrl": "https://localhost:7242;http://localhost:5295",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -22,7 +22,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      //"launchUrl": "WEBAPP_NAME",
+      //"launchUrl": "HubAplicacional",
       "applicationUrl": "https://localhost:44367;http://localhost:5128",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"

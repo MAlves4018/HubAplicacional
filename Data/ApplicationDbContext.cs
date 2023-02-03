@@ -19,7 +19,6 @@ namespace WebApp.Data
         public DbSet<RoleMenuPermission> RoleMenuPermissions { get; set; } 
         public DbSet<NavigationMenu> NavigationMenus { get; set; } 
         public DbSet<RolePermission> RolePermissions { get; set; }
-        public DbSet<Unidade> Unidades { get; set; }
 
         //APPLICATION SPECIFIC MODELS  
         public DbSet<WebApp.Models.ApplicationModels.Alertas> Alertas { get; set; }
@@ -72,10 +71,10 @@ namespace WebApp.Data
             var adminUser3 = new ApplicationUser() /* password is "P@ssw0rd" */
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = "03642512",
-                NormalizedUserName = "03642512",
-                Email = "batista.cds@exercito.pt",
-                NormalizedEmail = "batista.cds@exercito.pt",
+                UserName = "255667182",
+                NormalizedUserName = "255667182",
+                Email = "alves.mas@exercito.pt",
+                NormalizedEmail = "alves.mas@exercito.pt",
                 EmailConfirmed = true,
                 PasswordHash =
                   "AQAFGTEAACcQAAAAEKYfUQJgm2Shlb0Y27ObJK4ttO3dSheYpae6UCcL084qro1IcPBDyBtgg1LYb2uCzw==",
@@ -175,6 +174,12 @@ namespace WebApp.Data
                 }
             }
         }
+
+        // AUXILIARY QUERIES FOR NOT MAPPED TABLES (NOT A GOOD PRACTICE, CHANGE WHEN MANY-TO-MANY IS SUPPORTED BY IDENTITYUSER)
+        public DbSet<WebApp.Models.ApplicationModels.Tecnologias> Tecnologias { get; set; } = default!;
+
+        // AUXILIARY QUERIES FOR NOT MAPPED TABLES (NOT A GOOD PRACTICE, CHANGE WHEN MANY-TO-MANY IS SUPPORTED BY IDENTITYUSER)
+       
 
        
     }

@@ -1,0 +1,85 @@
+﻿@model WebApp.Models.ApplicationModels.Tecnologias
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@*<h1>Create</h1>
+*@
+@*<h4>Tecnologias</h4>
+*@<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sigla" class="control-label"></label>
+                <input asp-for="Sigla" class="form-control" />
+                <span asp-validation-for="Sigla" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Linklogs" class="control-label"></label>
+                <input asp-for="Linklogs" class="form-control" />
+                <span asp-validation-for="Linklogs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Linkdocs" class="control-label"></label>
+                <input asp-for="Linkdocs" class="form-control" />
+                <span asp-validation-for="Linkdocs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Linkreports" class="control-label"></label>
+                <input asp-for="Linkreports" class="form-control" />
+                <span asp-validation-for="Linkreports" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AD" class="control-label"></label>
+                <input asp-for="AD" class="form-control" />
+                <span asp-validation-for="AD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DB" class="control-label"></label>
+                <input asp-for="DB" class="form-control" />
+                <span asp-validation-for="DB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Maildev" class="control-label"></label>
+                <input asp-for="Maildev" class="form-control" />
+                <span asp-validation-for="Maildev" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" accept="image/" />@*class="form-control"*@
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index">Back to List</a>
+            
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+   
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
