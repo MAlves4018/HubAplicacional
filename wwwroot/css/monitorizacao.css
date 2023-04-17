@@ -1,0 +1,120 @@
+
+:root {
+    --dark: #444444;
+    --white: #ffffff;
+  }
+
+body {
+    background-color: #f7f7f7;
+}
+
+a.nav-link {
+    cursor: pointer;
+}
+
+.stats-box {
+    padding: 20px 11px;
+    margin: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.068) !important;
+    background-color: white;
+    transition: 0.2s;
+    min-height: 130px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    color: rgb(51, 51, 51);
+}
+
+.stats-box:hover {
+    box-shadow: 0 .5rem 1.2rem rgba(0, 0, 0, 0.164) !important;
+    background-color: white;
+    transform: scale(1.01);
+}
+
+.stats-box p {
+    font-weight: 300;
+
+    margin: 0px 0px 5px;
+}
+
+
+.custom-card.card-off {
+    box-shadow: 0px 0px 9px 5px #c9000066 !important;
+}
+
+.custom-card .btn {
+    padding: 0 10px 0px 10px;
+}
+
+.stats-box.card-off {
+    background-color: #dc3545 !important;
+    color: white;
+}
+
+.stats-box.card-off .icon {
+    color: white;
+    opacity: 50%;
+}
+
+.stats-box.card-off .badge {
+    background-color: white !important;
+    color: black;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 35px;
+    opacity: 10%;
+}
+
+.principal {
+    display: flex;
+}
+
+.Searchdark {
+    display: flex;
+    position: absolute;
+    right: 150px;
+    width: 500px;
+}
+.custom-card {
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 350px;
+    display: flex;
+    background-color: white;
+    position: relative;
+    transition: 500ms;
+    transition-property: opacity;
+}
+
+.container-cards {
+    display: flex; 
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 60px;
+    margin: 30px 0;
+}
+
+img.custom-card-img-top {
+    width: 100%;
+    position: relative;
+    right: 57px;
+    max-width: 108px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.tab-content {
+    background-color: #f7f7f7;
+}
+
+.custom-card.tohide {
+    /* display: none;  */
+    opacity: 0%;
+    position: absolute;
+}

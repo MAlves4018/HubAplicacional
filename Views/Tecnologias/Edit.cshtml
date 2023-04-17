@@ -1,89 +1,108 @@
 ﻿@model WebApp.Models.ApplicationModels.Tecnologias
 
 @{
-    ViewData["Title"] = "Edit";
+    var pageId = "dlg-cont-role";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "Edit";
+        Layout = "_LayoutRole";
+        pageId = "dlg-cont-role-p";
+    }
 }
+@*<h1>Edit</h1>*@
 
-@*<h1>Edit</h1>
-*@@*
-<h4>Tecnologias</h4>*@
-<hr />
+@*<h4>Tecnologias</h4>*@
+@*<hr />*@
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-12">
+        <form asp-action="Edit" asp-controller="Tecnologias" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
+            <div class="row">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group col-12 col-md-6">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-12 col-md-6">
                 <label asp-for="Sigla" class="control-label"></label>
                 <input asp-for="Sigla" class="form-control" />
                 <span asp-validation-for="Sigla" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-12 col-md-6">
                 <label asp-for="Link" class="control-label"></label>
                 <input asp-for="Link" class="form-control" />
                 <span asp-validation-for="Link" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Linklogs" class="control-label"></label>
-                <input asp-for="Linklogs" class="form-control" />
-                <span asp-validation-for="Linklogs" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group col-12 col-md-6">
                 <label asp-for="Linkdocs" class="control-label"></label>
                 <input asp-for="Linkdocs" class="form-control" />
                 <span asp-validation-for="Linkdocs" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-12 col-md-6">
+                <label asp-for="Linklogs" class="control-label"></label>
+                <input asp-for="Linklogs" class="form-control" />
+                <span asp-validation-for="Linklogs" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12 col-md-6">
                 <label asp-for="Linkreports" class="control-label"></label>
                 <input asp-for="Linkreports" class="form-control" />
                 <span asp-validation-for="Linkreports" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="AD" class="control-label"></label>
-                <input asp-for="AD" class="form-control" />
-                <span asp-validation-for="AD" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DB" class="control-label"></label>
-                <input asp-for="DB" class="form-control" />
-                <span asp-validation-for="DB" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+           
+            <div class="form-group col-12 col-md-6">
                 <label asp-for="Descricao" class="control-label"></label>
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-12 col-md-6">
                 <label asp-for="Maildev" class="control-label"></label>
                 <input asp-for="Maildev" class="form-control" />
                 <span asp-validation-for="Maildev" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-12 col-md-6">
+                <label asp-for="TypeId" class="control-label"></label>
+                <select asp-for="TypeId" class="form-control" asp-items="ViewBag.TypeId"></select>
+                <span asp-validation-for="TypeId" class="text-danger"></span>
+            </div>
+            @*<div class="form-group col-12 col-md-6">
                 <label asp-for="ImageName" class="control-label"></label>
                 <input asp-for="ImageName" class="form-control" />
                 <span asp-validation-for="ImageName" class="text-danger"></span>
+            </div>*@
+            <div class="form-group col-12 col-md-6">
+                <label asp-for="ImageFile" class="control-label"></label>@*>Imagem **@
+                <input asp-for="ImageFile" accept="image/" />@*class="form-control"*@
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" accept="image/" />@*class="form-control"
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>*@
             @*<div class="form-group">
                 <label asp-for="ImageName" class="control-label"></label>
                 <input asp-for="ImageFile" accept="image/" />@*class="form-control"*@
-                @*<span asp-validation-for="ImageFile" class="text-danger"></span>
+            @*<span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index">Back to List</a>
-
+            <div>
+                <p></p>
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <input type="submit" value="Confirm" class="btn btn-primary" />
+               @* <a asp-action="Index">Back to List</a>*@
+            </div>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    
+  @*  <a asp-action="Index">Back to List</a>*@
 </div>
 
 @section Scripts {

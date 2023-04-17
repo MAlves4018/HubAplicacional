@@ -4,13 +4,62 @@
     ViewData["Title"] = "Index";
 }
 
-@*<h1>Index</h1>
-*@
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+
+<h4>Coleção das tecnologias</h4> 
+
+
+<script>
+    var informespandida = document.getElementsByClassName("dt-hasChild shown")
+    var filtrocount = 0;
+    var filtro = true;
+
+    function handleClickAtivos() {
+        document.querySelectorAll('.apagado').forEach(ele => ele.style.display = 'none');
+        document.querySelectorAll('.ativo').forEach(ele => ele.style.display = 'table-row');
+    }
+    function handleClickInativos() {
+        document.querySelectorAll('.apagado').forEach(ele => ele.style.display = 'table-row');
+        document.querySelectorAll('.ativo').forEach(ele => ele.style.display = 'none');
+    }
+    function chancheselected(){   
+    var e = document.getElementById("ddlViewBy");
+    var Value = e.value;
+        if (Value==1){
+            handleClickAtivos();
+        } else if (Value == 2) {
+            handleClickInativos();
+        } else if (Value == 3) {
+            document.querySelectorAll('tr').forEach(ele => ele.style.display = 'table-row');
+        }else{
+
+        }
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+    handleClickAtivos();
+        
+    });
+</script>
+
+<div>
+    <a class="btn btn-secondary mb-4 modal-link" title="Nova Tecnologia" url='@Url.Content("~/Tecnologias/Create")'>Criar nova</a>
+    @*<button type="button" class="btn btn-danger mb-4" title="Ver histórico de tecnologias" onclick="location.href='@Url.Action("IndexApagados","Tecnologias")'">Registos inativos</button>
+    <button type="button" class="btn btn-danger mb-4" title="1" onclick="handleClickAtivos()">1-Ativos</button>
+    <button type="button" class="btn btn-danger mb-4" title="2" onclick="handleClickInativos()">2-Inativos</button>
+    <button type="button" class="btn btn-danger mb-4" title="3" onclick="document.querySelectorAll('tr').forEach(ele => ele.style.display = 'table-row');">3-Todos</button>*@
+    <form action="/action_page.php">
+        <label for="registos">Filtro de registos:</label>
+        <select name="registosstate" id="ddlViewBy" onchange="chancheselected()">
+            <option value="1">Ativos</option>
+            <option value="2">Inativos</option>
+            <option value="3">Todos</option>
+        </select>
+        <br><br>
+    </form>
+</div>
+
+
+<table class="table table-striped pt-4">
+    <thead class="table-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -22,92 +71,48 @@
                 @Html.DisplayNameFor(model => model.Link)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Linklogs)
+                @Html.DisplayNameFor(model => model.Tipo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Linkdocs)
+                @Html.DisplayNameFor(model => model.ImageFile)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Linkreports)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AD)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DB)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Maildev)
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.ImageName)*@
-                <dt class="col-sm-2">
-                Uploaded Image
-                @*@Html.DisplayNameFor(model => model.ImageName)*@
-            </dt>
-            </th>
-           @* <dt class="col-sm-2">
-                Uploaded Image
-                Html.DisplayNameFor(model => model.ImageName)
-            </dt>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sigla)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Linklogs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Linkdocs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Linkreports)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AD)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Maildev)
-            </td>
-            <td>
-               @* @Html.DisplayFor(modelItem => item.ImageName)*@
+        @foreach (var item in Model)
+        {
+            <tr class=@(item.Apagado ? "apagado" : "ativo")>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sigla)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Link)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo.Name)
+                </td>
+                <td>
                     <dd class="col-sm-10">
-                        <img src="@("~/image/"+item.ImageName)" asp-append-version="true" width="150px" height="100px" />
-                        @*@Html.DisplayFor(model => model.ImageName)*@
+                        <img src="@("~/image/"+item.ImageName)" asp-append-version="true" width="100px" height="67px" />
                     </dd>
-            </td>
-               @* <dd class="col-sm-10">
-                    <img src="@("~/image/"+item.ImageName)" asp-append-version="true" width="150px" height="100px" />
-                    *@@*@Html.DisplayFor(model => model.ImageName)*@
-           @* </dd>*@
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    <a class="modal-link" title="Ver tecnologia @item.Name" url='@Url.Content("~/Tecnologias/Details")/@item.Id'><i class="fa-solid fa-circle-info text-primary crud-icon"></i></a>
+                    <a class="modal-link" id="Editbutton" title="Editar tecnologia @item.Name" url='@Url.Content("~/Tecnologias/Edit")/@item.Id'><i class="fa-solid fa-square-pen text-success crud-icon"></i></a>
+                    @if (item.Apagado)
+                    {
+                        <a class='modal-link' title='Repor tecnologia @item.Name' url='@Url.Content("~/Tecnologias/DeleteRepor")/@item.Id'><i class='fa-solid fa-recycle  text-warning crud-icon' style='color: #f3ff47;'></i></a>
+                    }
+                    else
+                    {
+                        <a class='modal-link' title='Apagar tecnologia @item.Name' url='@Url.Content("~/Tecnologias/Delete")/@item.Id'><i class='fa-solid fa-circle-xmark text-danger crud-icon'></i></a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

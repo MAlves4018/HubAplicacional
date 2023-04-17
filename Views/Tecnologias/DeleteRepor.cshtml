@@ -1,0 +1,100 @@
+﻿@model WebApp.Models.ApplicationModels.Tecnologias
+
+@{
+    var pageId = "dlg-cont-role";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "DeleteRepor";
+        Layout = "_LayoutRole";
+        pageId = "dlg-cont-role-p";
+    }
+}
+@*
+<h1>Delete</h1>*@
+
+<h3>Têm a certeza de que reativar esta tecnologia?</h3>
+<div class="col-12">
+    @*<h4>Tecnologias</h4>*@
+   @* <hr />*@
+    <dl class="row">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Sigla)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Sigla)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Link)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Link)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Linkdocs)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Linkdocs)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Linklogs)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Linklogs)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Linkreports)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Linkreports)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Maildev)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Maildev)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Tipo.Name)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+        <dt class="col-sm-6">
+           Uploaded Image
+        </dt>
+        <dd class="col-sm-6">
+            <img src="@("~/image/"+Model.ImageName)" asp-append-version="true" width="150px" height="100px" />
+           @* @Html.DisplayFor(model => model.ImageName)*@
+        </dd>
+    </dl>
+    <div>
+        <p></p>
+    </div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Reativar" class="btn btn-warning" />
+        @*<a asp-action="Index">Back to List</a>*@
+    </form>
+</div>

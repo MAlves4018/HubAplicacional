@@ -6,63 +6,62 @@ namespace WebApp.Models.ApplicationModels
 {
     public class Tecnologias
     {
+
         [Key]
-        [DisplayName("Technology's ID")]
-        public int ID { get; set; }
+        [DisplayName("ID")]
+        public int Id { get; set; }
 
 
         [Required]
-        [DisplayName("Technology's name")]
-        public string? Name { get; set; }
+        [DisplayName("*Nome")]
+        public string Name { get; set; }
 
         [Required]
-        [DisplayName("Technology's acronym")]
-        public string? Sigla { get; set; }
+        [DisplayName("*Sigla")]
+        public string Sigla { get; set; }
 
-        [Required]
+
         [DisplayName("Link")]
         public string? Link { get; set; }
 
-        [Required]
-        [DisplayName("Logs Link")]
-        public string? Linklogs { get; set; }
-
-        [Required]
-        [DisplayName("Docs Link")]
+     
+        [DisplayName("Link da documentação")]
         public string? Linkdocs { get; set; }
 
-        [Required]
-        [DisplayName("Reports Link")]
+ 
+        [DisplayName("Link dos logs")]
+        public string? Linklogs { get; set; }
+
+
+  
+        [DisplayName("Link dos reports")]
         public string? Linkreports { get; set; }
 
-        [Required]
-        [DisplayName("AD")]
-        public bool? AD { get; set; }
 
-        [Required]
-        [DisplayName("DB")]
-        public bool? DB { get; set; }
 
-        [Required]
-        [DisplayName("Description")]
+ 
+        [DisplayName("Descriçao")]
         public string? Descricao { get; set; }
 
-        [Required]
-        [DisplayName("Developer's email")]
+ 
+        [DisplayName("Email do criador")]
         public string? Maildev { get; set; }
 
-        [Required]
-        [DisplayName("Image Name")]
-        public string ?ImageName { get; set; }
+        public int TypeId { get; set; }
 
-        //public int FotoId { get; set; }
+        [DisplayName("*Nome do tipo")]
+        [ForeignKey("TypeId")]
+        public Tipos ? Tipo { get; set; }
 
-        //[ForeignKey("FotoId")]
-        //public Foto? Foto { get; set; }
+        [DisplayName("Nome da imagem")]
+        public string ?  ImageName{ get; set; }
+
         [NotMapped]
-        [DisplayName("Upload file")]
-        public IFormFile ?ImageFile { get; set; }
+        [DisplayName("*Nome do ficheiro")]
+        public IFormFile ? ImageFile { get; set; }
 
+        [DisplayName("Estado do tipo: ")]
+        public bool Apagado { get; set; }
 
     }
 }

@@ -420,12 +420,6 @@ namespace WebApp.Controllers
                     var user = await _context.Users.Where(w => w.Id == viewModel.Id).FirstOrDefaultAsync();
                     if (user is null)
                         return RedirectToAction(nameof(Users));
-                    var ad_user = ExercitoAD.GetInfoUserAD(viewModel.UserName);
-
-                  
-                    user.UserName = viewModel.UserName;
-                    user.Email = ad_user.email;
-                    user.PhoneNumber = viewModel.PhoneNumber;
 
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
@@ -541,35 +535,24 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                 var ad_user = ExercitoAD.GetInfoUserAD(viewModel.UserName);
-                if(ad_user != null)
+                var user = new ApplicationUser()
                 {
-                    var user = new ApplicationUser()
-                    {
-                        UserName = viewModel.UserName,
-                        PhoneNumber = viewModel.PhoneNumber,
-                        Email = ad_user.email, 
-                    };
+                    UserName = viewModel.UserName,
+                    PhoneNumber = viewModel.PhoneNumber
+                };
 
-                    var result = await _userManager.CreateAsync(user);
+                var result = await _userManager.CreateAsync(user);
 
-                    if (result.Succeeded)
-                    {
-                        _userMessages.AddUserMessage("Criar utilizador",
-                            "O utilizador " + user.UserName + " foi criado com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
-                        return RedirectToAction(nameof(Users));
-                    }
-
-                    _userMessages.AddUserMessage("Criar utilizador",
-                            "Não foi possível criar o utilizador. Verifique se já existe.", IUserMessages.ErrorCode.DANGER, 2500);
-                    ModelState.AddModelError("Roles", "Não foi possível criar o utilizador. Verifique se já existe.");
-                }
-                else
+                if (result.Succeeded)
                 {
                     _userMessages.AddUserMessage("Criar utilizador",
-                            "O utilizador " + viewModel.UserName + " não existe na Active Directory do Exército.", IUserMessages.ErrorCode.DANGER, 2500);
-
+                        "O utilizador " + user.UserName + " foi criado com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
+                    return RedirectToAction(nameof(Users));
                 }
+
+                _userMessages.AddUserMessage("Criar utilizador",
+                        "Não foi possível criar o utilizador. Verifique se já existe.", IUserMessages.ErrorCode.DANGER, 2500);
+                ModelState.AddModelError("Roles", "Não foi possível criar o utilizador. Verifique se já existe.");
 
             }
 

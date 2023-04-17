@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApp.Models.ApplicationModels.EstadoTecnologia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Estado das Tecnologias</h1>
+
+<table class="table table-striped pt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>
+
+               Nome da aplicação
+              
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ADUp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DBUp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ok)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Timestamp)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <c class="modal-link" title="Ver tecnologia @item.NameTecnologia" url='@Url.Content("~/Tecnologias/Details")/@item.IdTecnologia'>@Html.DisplayFor(modelItem => item.NameTecnologia)</c>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ADUp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DBUp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ok)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Timestamp)
+        </tr>
+}
+    </tbody>
+</table>

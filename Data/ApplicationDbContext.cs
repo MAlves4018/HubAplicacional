@@ -40,39 +40,11 @@ namespace WebApp.Data
                 .HasIndex(x => x.Name)
                 .IsUnique();
 
-   
-
             var adminUser = new ApplicationUser() /* password is "P@ssw0rd" */
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = "03077412",
-                NormalizedUserName = "03077412",
-                Email = "atanasio.gc@exercito.pt",
-                NormalizedEmail = "atanasio.gc@exercito.pt",
-                EmailConfirmed = true,
-                PasswordHash =
-                    "AQAAAAEAACcQAAAAEKYfUQJgm2Shlb0Y27ObJK4ttO3dSheYpae6UCcL084qro1IcPBDyBtgg1LYb2uCzw==",
-                SecurityStamp = "4Y6BSSJXKUHFGAEMVEUWL3XH3DEGUTRF",
-                ConcurrencyStamp = "21a41ca8-d2e3-46ac-b53f-925edccd1eb7",  
-            };
-            var adminUser2 = new ApplicationUser() /* password is "P@ssw0rd" */
-            {
-                Id = Guid.NewGuid().ToString(),
-                UserName = "15283213",
-                NormalizedUserName = "15283213",
-                Email = "lourenco.kc@exercito.pt",
-                NormalizedEmail = "lourenco.kc@exercito.pt",
-                EmailConfirmed = true,
-                PasswordHash =
-                  "AQAAAAEAACcQAAAAEKYfUQJgm2Shlb0Y27ObJK4ttO3dSheYpae6UCcL084qro1IcPBDyBtgg1LYb2uCzw==",
-                SecurityStamp = "4Y6BSSJXKUHFGAEMVEUWL3XH3DEGUTRF",
-                ConcurrencyStamp = "21a41ca8-d2e3-46ac-b53f-925edccd1eb7",
-            };
-            var adminUser3 = new ApplicationUser() /* password is "P@ssw0rd" */
-            {
-                Id = Guid.NewGuid().ToString(),
-                UserName = "255667182",
-                NormalizedUserName = "255667182",
+                UserName = "migkx",
+                NormalizedUserName = "255667183",
                 Email = "alves.mas@exercito.pt",
                 NormalizedEmail = "alves.mas@exercito.pt",
                 EmailConfirmed = true,
@@ -86,16 +58,18 @@ namespace WebApp.Data
             builder.Entity<IdentityRole>().HasData(adminRole);
 
 
-            builder.Entity<ApplicationUser>().HasData(adminUser, adminUser2, adminUser3);
+            builder.Entity<ApplicationUser>().HasData(adminUser);
              
             builder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string>() { UserId = adminUser.Id, RoleId = adminRole.Id },
-                new IdentityUserRole<string>() { UserId = adminUser2.Id, RoleId = adminRole.Id },
-                new IdentityUserRole<string>() { UserId = adminUser3.Id, RoleId = adminRole.Id }
+                new IdentityUserRole<string>() { UserId = adminUser.Id, RoleId = adminRole.Id }
             );
 
 
             var adminMenuId = Guid.NewGuid();
+            var tiposMenuId = Guid.NewGuid();
+            var tecnologiasMenuId = Guid.NewGuid();
+            var estadosTecnologiasId = Guid.NewGuid();
+
             var menus = new NavigationMenu[]
             {
                 new NavigationMenu()
@@ -121,7 +95,7 @@ namespace WebApp.Data
                 new NavigationMenu()
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Perfils",
+                    Name = "Perfis",
                     ControllerName = "Admin",
                     ActionName = "Roles",
                     ParentMenuId = adminMenuId,
@@ -137,11 +111,91 @@ namespace WebApp.Data
                     ParentMenuId = adminMenuId,
                     DisplayOrder = 3,
                     Visible = true,
-                }
+                },
+                new NavigationMenu()
+                {
+                    Id = tecnologiasMenuId,
+                    Name = "Tecnologias",
+                    ControllerName = "Tecnologias",
+                    ActionName = "",
+                    ParentMenuId = null,
+                    DisplayOrder = 2,
+                    Visible = true,
+                },
+                new NavigationMenu()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Lista",
+                    ControllerName = "Tecnologias",
+                    ActionName = "Index",
+                    ParentMenuId = tecnologiasMenuId,
+                    DisplayOrder = 1,
+                    Visible = true,
+                },
+                new NavigationMenu()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Monitorização",
+                    ControllerName = "Tecnologias",
+                    ActionName = "MonitorizacaoPage",
+                    ParentMenuId = tecnologiasMenuId,
+                    DisplayOrder = 2,
+                    Visible = true,
+                },
+                new NavigationMenu()
+                {
+                    Id = tiposMenuId,
+                    Name = "Tipos de Tecnologias",
+                    ControllerName = "Tipos",
+                    ActionName = "",
+                    ParentMenuId = null,
+                    DisplayOrder = 3,
+                    Visible = true,
+                },
+                new NavigationMenu()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Lista",
+                    ControllerName = "Tipos",
+                    ActionName = "Index",
+                    ParentMenuId = tiposMenuId,
+                    DisplayOrder = 1,
+                    Visible = true,
+                },
+                new NavigationMenu()
+                {
+                    Id = estadosTecnologiasId,
+                    Name = "Estados de Tecnologias",
+                    ControllerName = "EstadoTecnologias",
+                    ActionName = "",
+                    ParentMenuId = null,
+                    DisplayOrder = 4,
+                    Visible = true,
+                },
+                new NavigationMenu()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Lista",
+                    ControllerName = "EstadoTecnologias",
+                    ActionName = "Index",
+                    ParentMenuId = estadosTecnologiasId,
+                    DisplayOrder = 1,
+                    Visible = true,
+                },
             };
 
             builder.Entity<NavigationMenu>().HasData(menus);
 
+            builder.Entity<Tipos>().HasData(
+                new Tipos() { Id = 1, Ativo=true, Name="Bases de dados ORACLE", Ordem=1},
+                new Tipos() { Id = 2, Ativo =true, Name="Bases de dados SQL Server", Ordem=2},
+                new Tipos() { Id = 3, Ativo =true, Name="Servidores Aplicacionais", Ordem=3},
+                new Tipos() { Id = 4, Ativo =true, Name="Aplicações", Ordem=4}
+            );
+
+            //builder.Entity<Tecnologias>().HasData(
+                //new Tecnologias() { Id = 1, Name="GitHub", Descricao="", TypeId = 4 , Sigla = "GitHub", Link="https://github.com" }
+          //   );
 
             foreach (var item in menus)
             {
@@ -177,10 +231,13 @@ namespace WebApp.Data
 
         // AUXILIARY QUERIES FOR NOT MAPPED TABLES (NOT A GOOD PRACTICE, CHANGE WHEN MANY-TO-MANY IS SUPPORTED BY IDENTITYUSER)
         public DbSet<WebApp.Models.ApplicationModels.Tecnologias> Tecnologias { get; set; } = default!;
+         
+        public DbSet<WebApp.Models.ApplicationModels.Tipos> Tipos { get; set; } = default!;
 
-        // AUXILIARY QUERIES FOR NOT MAPPED TABLES (NOT A GOOD PRACTICE, CHANGE WHEN MANY-TO-MANY IS SUPPORTED BY IDENTITYUSER)
-       
+        public DbSet<WebApp.Models.ApplicationModels.EstadoTecnologia> EstadosTecnologia { get; set; } = default!;
 
-       
+        public DbSet<WebApp.Models.ApplicationModels.Deletedtecnologies> Deletedtecnologies { get; set; } = default!;
+
+        
     }
 }

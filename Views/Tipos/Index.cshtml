@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApp.Models.ApplicationModels.Tipos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<h1>Index</h1>*@
+<h4>Coleção das tipologias</h4>@*Typologies gallery*@
+
+<p>
+    <a class="btn btn-primary mb-4 modal-link" title="Novo tipo" url='@Url.Content("~/Tipos/Create")'>Criar novo</a>
+</p>
+<table class="table table-striped pt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ordem)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ordem)
+            </td>
+            <td>
+               @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                    <a class="modal-link" title="Ver tipologia @item.Name" url='@Url.Content("~/Tipos/Details")/@item.Id'><i class="fa-solid fa-circle-info text-primary crud-icon"></i></a>
+                    <a class="modal-link" id="Editbutton" title="Editar tipologia @item.Name" url='@Url.Content("~/Tipos/Edit")/@item.Id'><i class="fa-solid fa-square-pen text-success crud-icon"></i></a>
+                    <a class="modal-link" title="Apagar tipologia @item.Name" url='@Url.Content("~/Tipos/Delete")/@item.Id'><i class="fa-solid fa-circle-xmark text-danger crud-icon"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

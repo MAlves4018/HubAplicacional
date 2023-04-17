@@ -33,6 +33,7 @@ import '../js/bootstrap-toaster.js';
 import '../js/menu-tree.js';  
 import '../js/application.js'; 
 import '../js/modal-link.js';
+import '../js/monitorizacao.js';
 
   
 // Custom CSS imports
@@ -42,6 +43,7 @@ import '../css/bootstrap-toaster.css';
 import '../css/menu-tree.css';
 import '../css/global.css';
 import '../css/modal-link.css';
+import '../css/monitorizacao.css';
 
 console.log('The \'site\' bundle has been loaded!');
 

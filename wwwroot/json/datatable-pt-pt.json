@@ -1,15 +1,15 @@
 {
-  "emptyTable": "N�o foi encontrado nenhum registo",
+  "emptyTable": "Não foi encontrado nenhum registo",
   "loadingRecords": "A carregar...",
   "processing": "A processar...",
   "lengthMenu": "Mostrar _MENU_ registos",
-  "zeroRecords": "N�o foram encontrados resultados",
+  "zeroRecords": "Não foram encontrados resultados",
   "search": "Procurar:",
   "paginate": {
     "first": "Primeiro",
     "previous": "Anterior",
     "next": "Seguinte",
-    "last": "�ltimo"
+    "last": "Ultimo"
   },
   "aria": {
     "sortAscending": ": Ordenar colunas de forma ascendente",
@@ -18,20 +18,20 @@
   "autoFill": {
     "cancel": "cancelar",
     "fill": "preencher",
-    "fillHorizontal": "preencher c�lulas na horizontal",
-    "fillVertical": "preencher c�lulas na vertical"
+    "fillHorizontal": "preencher células na horizontal",
+    "fillVertical": "preencher células na vertical"
   },
   "buttons": {
-    "collection": "Cole��o",
+    "collection": "Coleção",
     "colvis": "Visibilidade de colunas",
     "colvisRestore": "Restaurar visibilidade",
     "copy": "Copiar",
-    "copyKeys": "Pressiona CTRL ou u2318 + C para copiar a informa��o para a �rea de transfer�ncia. Para cancelar, clica neste mensagem ou pressiona ESC.",
+    "copyKeys": "Pressiona CTRL ou u2318 + C para copiar a informação para a área de transferência. Para cancelar, clica neste mensagem ou pressiona ESC.",
     "copySuccess": {
-      "1": "Uma linha copiada para a �rea de transfer�ncia",
-      "_": "%ds linhas copiadas para a �rea de transfer�ncia"
+      "1": "Uma linha copiada para a área de transferência",
+      "_": "%ds linhas copiadas para a área de transferência"
     },
-    "copyTitle": "Copiar para a �rea de transfer�ncia",
+    "copyTitle": "Copiar para a área de transferência",
     "csv": "CSV",
     "excel": "Excel",
     "pageLength": {
@@ -45,13 +45,13 @@
   "infoFiltered": "(filtrado num total de _MAX_ registos)",
   "infoThousands": ".",
   "searchBuilder": {
-    "add": "Adicionar condi��o",
+    "add": "Adicionar condição",
     "button": {
       "0": "Construtor de pesquisa",
       "_": "Construtor de pesquisa (%d)"
     },
     "clearAll": "Limpar tudo",
-    "condition": "Condi��o",
+    "condition": "Condição",
     "conditions": {
       "date": {
         "after": "Depois",
@@ -60,8 +60,8 @@
         "empty": "Vazio",
         "equals": "Igual",
         "not": "Diferente",
-        "notBetween": "N�o est� entre",
-        "notEmpty": "N�o est� vazio"
+        "notBetween": "Não está entre",
+        "notEmpty": "Não está vazio"
       },
       "number": {
         "between": "Entre",
@@ -72,29 +72,29 @@
         "lt": "Menor que",
         "lte": "Menor ou igual a",
         "not": "Diferente",
-        "notBetween": "N�o est� entre",
-        "notEmpty": "N�o est� vazio"
+        "notBetween": "Não está entre",
+        "notEmpty": "Não está vazio"
       },
       "string": {
-        "contains": "Cont�m",
+        "contains": "Contém",
         "empty": "Vazio",
         "endsWith": "Termina em",
         "equals": "Igual",
         "not": "Diferente",
-        "notEmpty": "N�o est� vazio",
-        "startsWith": "Come�a em"
+        "notEmpty": "Não está vazio",
+        "startsWith": "Começa em"
       },
       "array": {
         "equals": "Igual",
         "empty": "Vazio",
-        "contains": "Cont�m",
+        "contains": "Contém",
         "not": "Diferente",
-        "notEmpty": "N�o est� vazio",
-        "without": "N�o cont�m"
+        "notEmpty": "Não está vazio",
+        "without": "Não Contém"
       }
     },
     "data": "Dados",
-    "deleteTitle": "Excluir condi��o de filtragem",
+    "deleteTitle": "Excluir condição de filtragem",
     "logicAnd": "E",
     "logicOr": "Ou",
     "title": {
@@ -106,19 +106,19 @@
   "searchPanes": {
     "clearMessage": "Limpar tudo",
     "collapse": {
-      "0": "Pain�is de pesquisa",
-      "_": "Pain�is de pesquisa (%d)"
+      "0": "Painéis de pesquisa",
+      "_": "Painéis de pesquisa (%d)"
     },
     "count": "{total}",
     "countFiltered": "{shown} ({total})",
-    "emptyPanes": "Sem pain�is de pesquisa",
-    "loadMessage": "A carregar pain�is de pesquisa",
+    "emptyPanes": "Sem painéis de pesquisa",
+    "loadMessage": "A carregar painéis de pesquisa",
     "title": "Filtros ativos"
   },
   "select": {
     "cells": {
-      "1": "1 c�lula seleccionada",
-      "_": "%d c�lulas seleccionadas"
+      "1": "1 célula seleccionada",
+      "_": "%d células seleccionadas"
     },
     "columns": {
       "1": "1 coluna seleccionada",
@@ -152,9 +152,9 @@
     },
     "multi": {
       "title": "Multiplos valores",
-      "info": "Os itens selecionados cont�m valores diferentes para esta entrada. Para editar e definir todos os itens para esta entrada com o mesmo valor, clique ou toque aqui, caso contr�rio, eles manter�o seus valores individuais.",
-      "restore": "Desfazer altera��es",
-      "noMulti": "Este campo n�o pode ser editado em grupo"
+      "info": "Os itens selecionados cont�m valores diferentes para esta entrada. Para editar e definir todos os itens para esta entrada com o mesmo valor, clique ou toque aqui, caso contrário, eles iram manter seus valores individuais.",
+      "restore": "Desfazer alterações",
+      "noMulti": "Este campo não pode ser editado em grupo"
     },
     "error": {
       "system": "Ocorreu um erro no sistema"
@@ -164,7 +164,7 @@
   "infoEmpty": "Mostrando 0 os registos num total de 0",
   "datetime": {
     "previous": "anterior",
-    "next": "pr�ximo",
+    "next": "próximo",
     "hours": "horas",
     "minutes": "minutos",
     "seconds": "segundos",
@@ -179,13 +179,13 @@
       "Qua",
       "Qui",
       "Sex",
-      "S�b",
+      "Sab",
       "Dom"
     ],
     "months": [
       "Janeiro",
       "Fevereiro",
-      "Mar�o",
+      "Março",
       "Abril",
       "Maio",
       "Junho",

@@ -7,20 +7,20 @@ namespace WebApp.Models.ApplicationModels
     {
 
         [Key]
-        [DisplayName("Type's ID")]
-        public int ID { get; set; }
+        [DisplayName("Id do tipo")]
+        public int Id { get; set; }
 
 
         [Required]
-        [DisplayName("Type's name")]
-        public string? Name { get; set; }
+        [DisplayName("*Nome")]
+        public string Name { get; set; }
 
         [Required]
-        [DisplayName("Type's state")]
-        public bool? Ativo { get; set; }
+        [DisplayName("Estado do tipo: ")]
+        public bool Ativo { get; set; }
 
         [Required]
-        [DisplayName("Type's order")]
-        public string? Ordem { get; set; }
+        [DisplayName("Ordem")]
+        public int? Ordem { get; set; }
     }
 }

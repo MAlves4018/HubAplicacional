@@ -1,0 +1,52 @@
+﻿@model WebApp.Models.ApplicationModels.Tipos
+
+@*@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+    <h4>Tipos</h4>
+    <hr />*@
+    @{
+    var pageId = "dlg-cont-role";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "Details";
+        Layout = "_LayoutRole";
+        pageId = "dlg-cont-role-p";
+    }
+}
+<div>
+    <dl class="row">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Ordem)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Ordem)
+        </dd>
+    </dl>
+</div>
+<div>
+    <p></p>
+</div>
+<div>
+ @*   <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>*@
+</div>

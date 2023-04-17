@@ -1,0 +1,49 @@
+﻿@model WebApp.Models.ApplicationModels.Tipos
+
+@{
+    var pageId = "dlg-cont-role";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "Delete";
+        Layout = "_LayoutRole";
+        pageId = "dlg-cont-role-p";
+    }
+}
+
+<h3>Têm a certeza de que pretendes apagar isto?</h3>@*Are you sure you want to delete this?*@
+<div>
+  @*  <h4>Tipos</h4>
+    <hr />*@
+    <dl class="row">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Ordem)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Ordem)
+        </dd>
+    </dl>
+    <div>
+        <p></p>
+    </div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Confirm" class="btn btn-danger" /> 
+      @*  <a asp-action="Index">Back to List</a>*@
+    </form>
+</div>

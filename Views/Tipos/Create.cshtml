@@ -1,0 +1,60 @@
+﻿@model WebApp.Models.ApplicationModels.Tipos
+
+
+@*@{
+    ViewData["Title"] = "Create";}
+<h1>Create a new Typology </h1>
+<h4>Tecnologias</h4>
+<hr />*@
+@{
+    var pageId = "dlg-cont-role";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false))
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "Create";
+        Layout = "_LayoutRole";
+        pageId = "dlg-cont-role-p";
+    }
+}
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Create" asp-controller="Tipos">
+            <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-12 col-md-8">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12 col-md-8">
+                <label asp-for="Ativo" class="control-label"></label>
+                <input asp-for="Ativo" />@*class="form-control"*@
+                <span asp-validation-for="Ativo" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12 col-md-8">
+                <label asp-for="Ordem" class="control-label"></label>
+                <input asp-for="Ordem" class="form-control" />
+                <span asp-validation-for="Ordem" class="text-danger"></span>
+            </div>
+           <div>
+                <p></p>
+            </div>
+            <div class="form-group col-12 col-md-8">
+                <input type="submit" value="Create" class="btn btn-primary" />
+               @* <a asp-action="Index">Back to List</a>*@
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

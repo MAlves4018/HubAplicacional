@@ -1,92 +1,123 @@
-﻿@model WebApp.Models.ApplicationModels.Tecnologias
+﻿ @model WebApp.Models.ApplicationModels.Tecnologias
 
 @{
-    ViewData["Title"] = "Details";
+    var pageId = "dlg-cont-role";
+    if (!ViewData.TryGetValue("useLayout", out var useLayout) || useLayout.Equals(false) )
+    {
+        Layout = null;
+    }
+    else
+    {
+        ViewData["ActivePage"] = "Details";
+        Layout = "_LayoutRole";
+        pageId = "dlg-cont-role-p";
+    }
 }
+@*<h1>Details</h1>*@
 
-@*<h1>Details</h1>
-*@
-<div>
-@*    <h4>Tecnologias</h4>
-*@    <hr />
+<div class="col-8">
+   
+@*    <h4>Tecnologias</h4>*@
+    @*<hr />*@
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-6">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-6">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-6">
             @Html.DisplayNameFor(model => model.Sigla)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-6">
             @Html.DisplayFor(model => model.Sigla)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-6">
             @Html.DisplayNameFor(model => model.Link)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-6">
             @Html.DisplayFor(model => model.Link)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Linklogs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Linklogs)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-6">
             @Html.DisplayNameFor(model => model.Linkdocs)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-6">
             @Html.DisplayFor(model => model.Linkdocs)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Linklogs)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Linklogs)
+        </dd>
+        <dt class = "col-sm-6">
             @Html.DisplayNameFor(model => model.Linkreports)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-6">
             @Html.DisplayFor(model => model.Linkreports)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AD)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AD)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DB)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DB)
-        </dd>
-        <dt class = "col-sm-2">
+ 
+        <dt class = "col-sm-6">
             @Html.DisplayNameFor(model => model.Descricao)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-6">
             @Html.DisplayFor(model => model.Descricao)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-6">
             @Html.DisplayNameFor(model => model.Maildev)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-6">
             @Html.DisplayFor(model => model.Maildev)
         </dd>
-        @*<dt class = "col-sm-2">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Tipo.Name)
+        </dd>
+       <dt class = "col-sm-6">
             @Html.DisplayNameFor(model => model.ImageName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-6">
             @Html.DisplayFor(model => model.ImageName)
+        @*<dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.ImageName)
         </dd>*@
-        <dt class="col-sm-2">
-            Uploaded Image
+        <dt class="col-sm-6">
+           @* Uploaded Image*@
             @*@Html.DisplayNameFor(model => model.ImageName)*@
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-6">
             <img src="@("~/image/"+Model.ImageName)" asp-append-version="true" width="150px" height="100px" />
             @*@Html.DisplayFor(model => model.ImageName)*@
         </dd>
+        
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <p></p>
+</div>
+<div>
+    @*<form asp-action="Edit" >
+        <a onclick="myFunction()" class="Button btn btn-info">Edit</a>@* href="/Tecnologias/Edit"*
+        <script>
+            function myFunction() {
+                document.getElementsByClassName("btn-close").click();
+                //document.getElementById("Editbutton").click();
+            }
+        </script>
+
+    </form>*@
+        @*<button type="button">Edit</button>*@
+       @* <a class="modal-link" title="Editar Tecnologia @item.Name" url='@Url.Content("~/Tecnologias/Edit")/@item.Id'><i class="fa-solid fa-square-pen text-success crud-icon"></i></a>*@
+        @*<input type="hidden" asp-for="Id" />
+        <input type="submit" value="Edit" class="btn btn-danger" /> *@
+        @*<a asp-action="Index">Back to List</a>*@
+    @* <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-danger">Edit</a> |
+    <a asp-action="Index" class="btn btn-danger">Back to List</a>
+    <a asp-action="Index">Back to List</a>*@
+
 </div>
