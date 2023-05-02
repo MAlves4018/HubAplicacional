@@ -1,4 +1,5 @@
-﻿<body>
+﻿<html>
+<body>
     <style>
     .oculto {
         display: none;
@@ -40,9 +41,9 @@
             text-decoration: none;
     }
 
-</style>
+</style>     
 <div class"paginatoda" id="todaapagina">
-<script>
+@*<script>
     const AcertadorDeModo = () =>{
         //Vai ver e o darck mode estava ou não ativo na ultima vez que se fechou a pagina e atualizar a página de acordo.
         if (localStorage.getItem("dark-mode") === "true")
@@ -416,6 +417,7 @@
                 
     }
 </script>
+*@
 <div>
     <div id="all-cards" class="row">
         <div class="col-lg-3 col-6">
@@ -443,7 +445,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-6">
-                <div class="stats-box" id="4Aplicaçõescard">
+                <div class="stats-box" id="4Aplicacoescard">
                     <h5 class="mb-3">Aplicações</h5>
                 <div class="icon"> <i class="fa-solid fa-2x fa-chart-line"></i></div>
                         <h6>App up/Tot</h6>
@@ -484,4 +486,6 @@
     </div>
 </div>
 </div>
+    <script src="~/js/Monitorizacaojs.js"></script>
     </body>
+</html>

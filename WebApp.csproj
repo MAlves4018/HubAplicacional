@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\5ubzjma4.zpz~" />
+    <Content Remove="wwwroot\js\monitorizacao.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Tecnologias\Monitorizacaojs.js" />
   </ItemGroup>
 
   <ItemGroup>

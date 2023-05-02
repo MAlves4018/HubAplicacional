@@ -37,7 +37,8 @@ namespace WebApp.Controllers
             List<EstadoTecnologia> estadosMaisRecentesTecnologias = new List<EstadoTecnologia>();
 
             // Buscar tecnologias
-            var todasTecnlogias = await _context.Tecnologias.ToListAsync();
+            var todasTecnlogias = await _context.Tecnologias.Include(t => t.Tipo).ToListAsync();
+           // var tipos= await _context.Tecnologias.Tipo.ToListAsync();
 
             if (todasTecnlogias != null)
             {
@@ -73,7 +74,7 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
-
+            //
             return estadoTecnologia;
         }
 
