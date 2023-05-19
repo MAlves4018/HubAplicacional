@@ -52,10 +52,64 @@ namespace WebApp.Controllers
                 {
                     //Bases Dados ORACLE
                     case 1:
-                        var EXAMPLE_CONNECTION = "Data Source=MyOracleDB;User Id=myUsername;Password=myPassword;Integrated Security=no;";
+                        //var EXAMPLE_CONNECTION = "Data Source=MyOracleDB;User Id=myUsername;Password=myPassword;Integrated Security=no;";
 
+                        //if (tecnologias != null)
+                        //{
+                        //    tecnologias.Link = tecnologias.Link.Replace("USER_REPLACE_ME", user).Replace("PASSWORD_REPLACE_ME", pwd);
+                        //    var test_query_oracle = "SELECT * FROM XXX WHERE rownum = 1";
+                        //    using (OracleConnection connection = new OracleConnection(tecnologias.Link))
+                        //    {
+                        //        try
+                        //        {
+                        //            connection.Open();
+                        //            Console.WriteLine("Connection established!");
+                        //            OracleCommand command = new OracleCommand(test_query_oracle, connection);
+                        //            OracleDataReader reader = command.ExecuteReader();
+
+                        //            while (reader.Read())
+                        //            {
+                        //                Console.WriteLine(reader.GetString(0));
+                        //            }
+
+                        //            reader.Close();
+                        //        }
+                        //        catch (Exception ex)
+                        //        {
+
+                        //            Console.WriteLine("Failed to connect to database: " + ex.Message);
+                        //        }
+                        //    }
+                        //}
                         if (tecnologias != null)
                         {
+                            //tecnologias.Link = tecnologias.Link.Replace("USER_REPLACE_ME", user).Replace("PASSWORD_REPLACE_ME", pwd);
+                            //var test_query_oracle = "SELECT * FROM XXX WHERE rownum = 1";
+                            //using (OracleConnection connection = new OracleConnection(tecnologias.Link))
+                            //{
+                            //    try
+                            //    {
+                            //        connection.Open();
+                            //        Console.WriteLine("Connection established!");
+                            //        using (OracleCommand command = new OracleCommand(test_query_oracle, connection))
+                            //        {
+                            //            OracleDataReader reader = command.ExecuteReader();
+                            //            while (reader.Read())
+                            //            {
+                            //                Console.WriteLine(reader.GetString(0));
+                            //            }
+                            //        }
+                            //    }
+                            //    catch (OracleException ex)
+                            //    {
+                            //        Console.WriteLine("Failed to connect to database: " + ex.Message);
+                            //    }
+                            //    finally
+                            //    {
+                            //        connection.Close();
+                            //    }
+                            //}
+
                             tecnologias.Link = tecnologias.Link.Replace("USER_REPLACE_ME", user).Replace("PASSWORD_REPLACE_ME", pwd);
                             var test_query_oracle = "SELECT * FROM XXX WHERE rownum = 1";
                             using (OracleConnection connection = new OracleConnection(tecnologias.Link))
@@ -64,20 +118,22 @@ namespace WebApp.Controllers
                                 {
                                     connection.Open();
                                     Console.WriteLine("Connection established!");
-                                    OracleCommand command = new OracleCommand(test_query_oracle, connection);
-                                    OracleDataReader reader = command.ExecuteReader();
-
-                                    while (reader.Read())
+                                    using (OracleCommand command = new OracleCommand(test_query_oracle, connection))
                                     {
-                                        Console.WriteLine(reader.GetString(0));
+                                        OracleDataReader reader = command.ExecuteReader();
+                                        while (reader.Read())
+                                        {
+                                            Console.WriteLine(reader.GetString(0));
+                                        }
                                     }
-
-                                    reader.Close();
                                 }
-                                catch (Exception ex)
+                                catch (OracleException ex)
                                 {
-
                                     Console.WriteLine("Failed to connect to database: " + ex.Message);
+                                }
+                                finally
+                                {
+                                    connection.Close();
                                 }
                             }
                         }

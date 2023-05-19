@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Routing;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace WebApp.Services
 {
@@ -16,7 +13,7 @@ namespace WebApp.Services
             _dataAccessService = dataAccessService;
             _httpContextAccessor = httpContextAccessor;
         }
-        
+
 
         protected async override Task HandleRequirementAsync(AuthorizationHandlerContext context,
             DynamicAuthorizationRequirement requirement)

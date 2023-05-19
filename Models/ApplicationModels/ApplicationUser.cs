@@ -1,15 +1,10 @@
-﻿using WebApp.Models; 
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace WebApp.Models.ApplicationModels
 {
     public class ApplicationUser : IdentityUser
     {
-    
+
         [PersonalData]
         public ICollection<Alertas> Alertas { get; set; }
 

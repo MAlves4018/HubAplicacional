@@ -73,7 +73,27 @@
                 }
             })
         }
-    }
+}
+
+    //const NameSlicer = (nome) => {
+    //    const name = nome.split(" ");
+    //    return name.join("");
+    //}
+
+    //const Disabledtype = (id, name) => {
+    //    console.log(id + "/" + name)
+    //    console.log(NameSlicer(name))
+    //    var idstr = id
+    //    var most = "Mostrar"
+    //    var idtouse = idstr + most
+    //    console.log(idtouse)
+    //    var namejunt = NameSlicer(name)
+    //    var cor = idstr + namejunt
+    //    console.log(cor)
+    //    document.getElementById(`${idtouse}`).innerHTML = ("*/*");
+    //    document.getElementById(`${cor}`).classList.remove("card-off");
+
+    //}
 
     const CriarSeparadorTipo = (id, name, state) => {
         //Separador correspondente ao tipo.
@@ -121,20 +141,52 @@
         //Altera o css das cards de informação localizadas no topo da pagina retirando a coloração vermelha.
         document.getElementById(a).classList.remove("card-off")
     }
+//const PopularCardNumero = (bons, todos, id, nome) => {
+//    //-------------------------------------------------------------------------------------------------Aqui popular card numero (geral) para não ficar hardcoded
+//    document.getElementById(${ id } + "Mostrar").innerHTML = (bons + "/" + todos);
+//    if (bons != todos) {
+//        document.getElementById(${ id } + ${ nome } + "Card").classList.add("card-off")
 
-    const PopularCardNumero1 = (bons, todos) => {
-        //Completa a card numero 1(Bases de dados Oracle) com o numero de tecnologias que estão de pé pelo total de tecnologias.
-        document.getElementById("1Mostrar").innerHTML = (bons + "/" + todos);
-        if (bons != todos) {
-            document.getElementById("1BasesdedadosORACLECard").classList.add("card-off")
-
-        } else {
-            document.getElementById("1BasesdedadosORACLECard").classList.remove("card-off")
+//    } else {
+//        document.getElementById(${ id } + ${ nome } + "Card").classList.remove("card-off")
+//    }
+//    document.getElementById(${ id } + "paracontagem").innerHTML = todos
+//}
+const PopularCardNumero1 = (bons, todos) => {
+    try {
+        const element = document.getElementById("1Mostrar");
+        if (element) {
+            element.innerHTML = bons + "/" + todos;
         }
-        document.getElementById("1paracontagem").innerHTML = todos
+        if (bons != todos) {
+            document.getElementById("1BasesdedadosORACLECard").classList.add("card-off");
+        } else {
+            document.getElementById("1BasesdedadosORACLECard").classList.remove("card-off");
+        }
+        document.getElementById("1paracontagem").innerHTML = todos;
+    } catch (error) {
+        console.error(error);
     }
-    const PopularCardNumero2 = (bons, todos) => {
-        //Completa a card numero 2(Bases de dados SQL Server) com o numero de tecnologias que estão de pé pelo total de tecnologias.
+};
+//const PopularCardNumero1 = (bons, todos) => {
+//    try {
+////Completa a card numero 1(Bases de dados Oracle) com o numero de tecnologias que estão de pé pelo total de tecnologias.
+//        document.getElementById("1Mostrar").innerHTML = (bons + "/" + todos);
+//        if (bons != todos) {
+//            document.getElementById("1BasesdedadosORACLECard").classList.add("card-off")
+
+//        } else {
+//            document.getElementById("1BasesdedadosORACLECard").classList.remove("card-off")
+//        }
+//        document.getElementById("1paracontagem").innerHTML = todos
+
+//    }
+        
+//    }
+
+const PopularCardNumero2 = (bons, todos) => {
+    try {
+//Completa a card numero 2(Bases de dados SQL Server) com o numero de tecnologias que estão de pé pelo total de tecnologias.
         document.getElementById("2Mostrar").innerHTML = (bons + "/" + todos);
         if (bons != todos) {
             document.getElementById("2BasesdedadosSQLServerCard").classList.add("card-off")
@@ -143,9 +195,14 @@
             document.getElementById("2BasesdedadosSQLServerCard").classList.remove("card-off")
         }
         document.getElementById("2paracontagem").innerHTML = todos
+    } catch (error) {
+        console.error(error);
     }
-    const PopularCardNumero3 = (bons, todos) => {
-        //Completa a card numero 3(Servidores Aplicacionais) com o numero de tecnologias que estão de pé pelo total de tecnologias. 
+        
+    }
+const PopularCardNumero3 = (bons, todos) => {
+    try {
+  //Completa a card numero 3(Servidores Aplicacionais) com o numero de tecnologias que estão de pé pelo total de tecnologias. 
         document.getElementById("3Mostrar").innerHTML = (bons + "/" + todos);
         if (bons != todos) {
             document.getElementById("3ServidoresAplicacionaisCard").classList.add("card-off")
@@ -153,9 +210,16 @@
         } else {
             document.getElementById("3ServidoresAplicacionaisCard").classList.remove("card-off")
         }
-        document.getElementById("3paracontagem").innerHTML = todos
+    document.getElementById("3paracontagem").innerHTML = todos
+    } catch (error) {
+        console.error(error);
     }
-    const PopularCardNumero4 = (bons, todos) => {
+      
+
+    }
+const PopularCardNumero4 = (bons, todos) => {
+    try {
+
         //Completa a card numero 4(Aplicações) com o numero de tecnologias que estão de pé pelo total de tecnologias.
         document.getElementById("4Mostrar").innerHTML = (bons + "/" + todos);
         if (bons != todos) {
@@ -166,6 +230,9 @@
         }
 
         document.getElementById("4paracontagem").innerHTML = todos
+    } catch (error) {
+        console.error(error);
+    }
 
     }
 
@@ -176,7 +243,8 @@
                 ele.classList.remove("active")
             }
         )
-    }
+}
+    
 
     const TestarLigacao = (idtec) => {
         fetch(`/EstadoTecnologias/Test/${idtec}`).then(
@@ -192,130 +260,229 @@
         });
     }
 
-const PainelDeControlo = () => {
-       
-        var totaldeaplicacoestypeum = 0;//typeId:3 total de aplicacoes
-        var respostaspositivastypeum = 0//typeId:3 respostas positivas
-        var totaldeaplicacoestypetres = 0;//typeId:3 total de aplicacoes
-        var respostaspositivastypetres = 0//typeId:3 respostas positivas
-        var totaldeaplicacoestypequatro = 0;//typeId:4 total de aplicacoes
-        var respostaspositivastypequatro = 0//typeId:4 respostas positivas
-        var sqlup = 0;
-        var sqltot = 0;
+//const PainelDeControlo = () => {
 
-        fetch("/api/EstadoTecnologiasAPI").then(
-            response => response.json()
-        ).then(
-            data => {
-                data.forEach(
-                    ele => {
-                        if (!ele.tecnologias.apagado) {
+//        var totaldeaplicacoestypeum = 0;//typeId:3 total de aplicacoes
+//        var respostaspositivastypeum = 0//typeId:3 respostas positivas
+//        var totaldeaplicacoestypetres = 0;//typeId:3 total de aplicacoes
+//        var respostaspositivastypetres = 0//typeId:3 respostas positivas
+//        var totaldeaplicacoestypequatro = 0;//typeId:4 total de aplicacoes
+//        var respostaspositivastypequatro = 0//typeId:4 respostas positivas
+//        var sqlup = 0;
+//        var sqltot = 0;
 
-                            switch (ele.tecnologias.typeId) {
+//        fetch("/api/EstadoTecnologiasAPI").then(
+//            response => response.json()
+//        ).then(
+//            data => {
+//                data.forEach(
 
-                                case 1:
-                                    if (ele.ok == true) {
-                                        totaldeaplicacoestypeum++;
-                                        respostaspositivastypeum++;
-                                    } else {
-                                        totaldeaplicacoestypeum++;
-                                    }
-                                    break;
-                                case 2:
+//                    ele => {
 
-                                    if (ele.ok == true) {
-                                        sqltot++;
-                                        sqlup++;
-                                    } else {
-                                        sqltot++;
-                                    }
-                                    break;
-                                case 3:
-                                    if (ele.ok == true) {
-                                        totaldeaplicacoestypetres++;
-                                        respostaspositivastypetres++;
-                                    } else {
-                                        totaldeaplicacoestypetres++;
-                                    }
-                                    break;
-                                case 4:
-                                    if (ele.ok == true) {
-                                        totaldeaplicacoestypequatro++;
-                                        respostaspositivastypequatro++;
-                                    } else {
-                                        totaldeaplicacoestypequatro++;
+//                        if (!ele.tecnologias.apagado) {
 
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    })
-                PopularCardNumero1(respostaspositivastypeum, totaldeaplicacoestypeum);
-                PopularCardNumero2(sqlup, sqltot);
-                PopularCardNumero3(respostaspositivastypetres, totaldeaplicacoestypetres);
-                PopularCardNumero4(respostaspositivastypequatro, totaldeaplicacoestypequatro);
-            }
-        ).catch(error => {
-            console.log(error)
-        });
-    }
+//                            switch (ele.tecnologias.typeId) {
 
+//                                case 1:
+//                                    if (ele.ok == true) {
+//                                        totaldeaplicacoestypeum++;
+//                                        respostaspositivastypeum++;
+//                                    } else {
+//                                        totaldeaplicacoestypeum++;
+//                                    }
+//                                    break;
+//                                case 2:
 
-const MetodoInicialParaFetch = () => {
-    
-        AcertadorDeModo();
-        fetch("/api/TiposAPI").then(
-            response => response.json()
-        ).then(
-            data => {
-                //if (ele.ativo)
+//                                    if (ele.ok == true) {
+//                                        sqltot++;
+//                                        sqlup++;
+//                                    } else {
+//                                        sqltot++;
+//                                    }
+//                                    break;
+//                                case 3:
+//                                    if (ele.ok == true) {
+//                                        totaldeaplicacoestypetres++;
+//                                        respostaspositivastypetres++;
+//                                    } else {
+//                                        totaldeaplicacoestypetres++;
+//                                    }
+//                                    break;
+//                                case 4:
+//                                    if (ele.ok == true) {
+//                                        totaldeaplicacoestypequatro++;
+//                                        respostaspositivastypequatro++;
+//                                    } else {
+//                                        totaldeaplicacoestypequatro++;
 
-                    separadorplacer = document.getElementById("separadorplacer")
-                separadorplacer.innerHTML = '';
-                pageplacer = document.getElementById("pageplacer")
-                pageplacer.innerHTML = '';
-                data.forEach(
-                    ele => {
-                        CriarSeparadorTipo(ele.id, ele.name, ele.ativo);
+//                                    }
+//                                    break;
+//                                default:
+//                                    break;
+//                            }
+//                        }
+//                    })
+//            })
+//                PopularCardNumero1(respostaspositivastypeum, totaldeaplicacoestypeum);
+//                PopularCardNumero2(sqlup, sqltot);
+//                PopularCardNumero3(respostaspositivastypetres, totaldeaplicacoestypetres);
+//                PopularCardNumero4(respostaspositivastypequatro, totaldeaplicacoestypequatro);
+//            }
+//        //).catch(error => {
+//        //    console.log(error)
+//        //});
+//    }
+
+const PainelDeControlo = async () => {
+    var totaldeaplicacoestypeum = 0; //typeId:3 total de aplicacoes
+    var respostaspositivastypeum = 0; //typeId:3 respostas positivas
+    var totaldeaplicacoestypetres = 0; //typeId:3 total de aplicacoes
+    var respostaspositivastypetres = 0; //typeId:3 respostas positivas
+    var totaldeaplicacoestypequatro = 0; //typeId:4 total de aplicacoes
+    var respostaspositivastypequatro = 0; //typeId:4 respostas positivas
+    var sqlup = 0;
+    var sqltot = 0;
+
+    try {
+        const response = await fetch("/api/EstadoTecnologiasAPI");
+        const data = await response.json();
+
+        data.forEach(ele => {
+            if (!ele.tecnologias.apagado) {
+                switch (ele.tecnologias.typeId) {
+                    case 1:
+                        if (ele.tipo.ativo) {
+                               if (ele.ok == true) {
+                                    totaldeaplicacoestypeum++;
+                                    respostaspositivastypeum++;
+                                } else {
+                                    totaldeaplicacoestypeum++;
+                                }
+                        } 
                         
-                    }
-                )
-            }
-        ).catch(error => {
-            console.log(error)
-        });
-
-
-        fetch("/api/TecnologiasAPI").then(
-            response => response.json()
-        ).then(
-            data => {
-                data.forEach(
-                    ele => {
-                        if (!ele.apagado) {
-
-
-                            let card = CriarCardTecnologia(ele.name, ele.descricao, ele.imageName, ele.link);
-                            document.getElementById(`cards${ele.tipo.id}`).appendChild(card);
-                            TestarLigacao(ele.id);
-
+                        break;
+                    case 2:
+                        if (ele.ok == true) {
+                            sqltot++;
+                            sqlup++;
+                        } else {
+                            sqltot++;
                         }
+                        break;
+                    case 3:
+                        if (ele.ok == true) {
+                            totaldeaplicacoestypetres++;
+                            respostaspositivastypetres++;
+                        } else {
+                            totaldeaplicacoestypetres++;
+                        }
+                        break;
+                    case 4:
+                        if (ele.ok == true) {
+                            totaldeaplicacoestypequatro++;
+                            respostaspositivastypequatro++;
+                        } else {
+                            totaldeaplicacoestypequatro++;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        PopularCardNumero1(respostaspositivastypeum, totaldeaplicacoestypeum);
+        PopularCardNumero2(sqlup, sqltot);
+        PopularCardNumero3(respostaspositivastypetres, totaldeaplicacoestypetres);
+        PopularCardNumero4(respostaspositivastypequatro, totaldeaplicacoestypequatro);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+function MetodoInicialParaFetch() {
+
+    AcertadorDeModo();
+    fetch("/api/TiposAPI").then(
+        response => response.json()
+    ).then(
+        data => {
+            //if (ele.ativo)
+            separadorplacer = document.getElementById("separadorplacer");
+            separadorplacer.innerHTML = '';
+            pageplacer = document.getElementById("pageplacer");
+            pageplacer.innerHTML = '';
+            data.forEach(
+                ele => {
+                    CriarSeparadorTipo(ele.id, ele.name, ele.ativo);
+                    if (ele.ativo == false) {
+                        var bbb = document.getElementById("1Mostrar");
+                        bbb.id = `${ele.id}Ocultar`
+                        bbb.innerHTML = "**/**"
+
 
                     }
-                )
-            }
+                }
+            );
+        }
+    ).catch(error => {
+        console.log(error);
+    });
 
-        ).catch(error => {
-            console.log(error)
-        });
-        PainelDeControlo();
-    }
+
+    fetch("/api/TecnologiasAPI").then(
+        response => response.json()
+    ).then(
+        data => {
+            data.forEach(
+                ele => {
+                    if (!ele.apagado) {
+
+
+                        let card = CriarCardTecnologia(ele.name, ele.descricao, ele.imageName, ele.link);
+                        document.getElementById(`cards${ele.tipo.id}`).appendChild(card);
+                        TestarLigacao(ele.id);
+
+                    }
+
+                }
+            );
+        }
+
+    ).catch(error => {
+        console.log(error);
+    });
+    PainelDeControlo();
+}
+//const Assertartipos = () = {
+//    console.log("SSIvosmfjne")
+//    fetch("/api/TiposAPI").then(
+//        response => response.json()
+//    ).then(
+//        data => {
+//            //if (ele.ativo)
+
+//            data.forEach(
+//                ele => {
+
+//                    var id = ele.id;
+//                    var nome = ele.name
+//                    if (ele.ativo == false) {
+//                        Disabledtype(id, nome);
+//                    }
+//                }
+//            );
+//        }
+//    ).catch(error => {
+//        console.log(error);
+//    });
+
+//}
 
 document.addEventListener("DOMContentLoaded", function () {
         MetodoInicialParaFetch();
-        setInterval(PainelDeControlo, 15000);
+    setInterval(PainelDeControlo, 15000);
+   /* Assertartipos();*/
         document.getElementById("search").addEventListener("keyup", (e) => {
             e.preventDefault();
             let arrayCards = document.querySelectorAll(".custom-card");

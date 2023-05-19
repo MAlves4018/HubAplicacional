@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace WebApp.Services
 {

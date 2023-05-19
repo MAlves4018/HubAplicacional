@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +9,7 @@ using WebApp.Services;
 
 namespace WebApp.Controllers
 {
-        [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
+    [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
     public class TecnologiasController : Controller
     {
         //private const string V = "Portapessoal.png";
@@ -31,7 +27,7 @@ namespace WebApp.Controllers
             var applicationDbContext = _context.Tecnologias.Include(t => t.Tipo);
             return View(await applicationDbContext.ToListAsync());
         }
-      
+
         // GET: Tecnologias
         public async Task<IActionResult> MonitorizacaoPage()
         {
@@ -73,41 +69,42 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Create([Bind("Id,Name,Sigla,Link,Linkdocs,Linklogs,Linkreports,Descricao,Maildev,TypeId,ImageFile")] Tecnologias tecnologias)
         {
-                string wwwRootPath = _hostEnvironment.WebRootPath;
+            string wwwRootPath = _hostEnvironment.WebRootPath;
             if (tecnologias.ImageFile != null)
             {
                 var files = Directory.GetFiles("C:\\Users\\255667182\\source\\repos\\HubAplicacional\\wwwroot\\Image\\");
                 foreach (var item in files)
                 {
-                if (item== tecnologias.ImageFile.FileName) {
+                    if (item== tecnologias.ImageFile.FileName)
+                    {
                         var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
                         string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
                         tecnologias.ImageName = fileName = fileName + extencion;
                         string path = Path.Combine(wwwRootPath + "/Image/", fileName);
                     }
-                else
-                {
+                    else
+                    {
 
-                var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
-                string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
-                    tecnologias.ImageName = fileName = fileName + extencion;
-                    string path = Path.Combine(wwwRootPath + "/Image/", fileName); 
-                    
-                using (var fileStream = new FileStream(path, FileMode.Create))
-                {
-                    await tecnologias.ImageFile.CopyToAsync(fileStream);
-                }
-                }
+                        var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
+                        string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
+                        tecnologias.ImageName = fileName = fileName + extencion;
+                        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await tecnologias.ImageFile.CopyToAsync(fileStream);
+                        }
+                    }
                 }
             }
             else
             {
                 tecnologias.ImageName = "Defaultimage.jpg";
             }
-             _context.Add(tecnologias);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-          }
+            _context.Add(tecnologias);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
         // GET: Tecnologias/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -118,7 +115,7 @@ namespace WebApp.Controllers
             }
 
             var tecnologias = await _context.Tecnologias.FindAsync(id);
-            
+
             if (tecnologias == null)
             {
                 return NotFound();
@@ -178,22 +175,22 @@ namespace WebApp.Controllers
             }
             try
             {
-                    _context.Update(tecnologias);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+                _context.Update(tecnologias);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TecnologiasExists(tecnologias.Id))
                 {
-                    if (!TecnologiasExists(tecnologias.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
-                return RedirectToAction(nameof(Index));
-             }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
         // GET: Tecnologias/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -240,21 +237,24 @@ namespace WebApp.Controllers
                 return Problem("Entity set 'ApplicationDbContext.Tecnologias'  is null.");
             }
             var tecnologias = await _context.Tecnologias.FindAsync(id);
-            if (tecnologias != null  )
+            if (tecnologias != null)
             {
-                if (tecnologias.Apagado == true) {
+                if (tecnologias.Apagado == true)
+                {
                     tecnologias.Apagado = false;
-                } else { 
-                tecnologias.Apagado = true;
+                }
+                else
+                {
+                    tecnologias.Apagado = true;
                 }
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         private bool TecnologiasExists(int id)
         {
-          return (_context.Tecnologias?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Tecnologias?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Models.ApplicationModels;
@@ -39,10 +33,10 @@ namespace WebApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Tecnologias>> GetTecnologias(int id)
         {
-          if (_context.Tecnologias == null)
-          {
-              return NotFound();
-          }
+            if (_context.Tecnologias == null)
+            {
+                return NotFound();
+            }
             var tecnologias = await _context.Tecnologias.FindAsync(id);
 
             if (tecnologias == null)
@@ -89,10 +83,10 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Tecnologias>> PostTecnologias(Tecnologias tecnologias)
         {
-          if (_context.Tecnologias == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Tecnologias'  is null.");
-          }
+            if (_context.Tecnologias == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Tecnologias'  is null.");
+            }
             _context.Tecnologias.Add(tecnologias);
             await _context.SaveChangesAsync();
 

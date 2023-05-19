@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Models.ApplicationModels;
@@ -25,9 +20,9 @@ namespace WebApp.Controllers
         // GET: Tipos
         public async Task<IActionResult> Index()
         {
-              return _context.Tipos != null ? 
-                          View(await _context.Tipos.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Tipos'  is null.");
+            return _context.Tipos != null ?
+                        View(await _context.Tipos.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Tipos'  is null.");
         }
 
         // GET: Tipos/Details/5
@@ -153,15 +148,15 @@ namespace WebApp.Controllers
             {
                 _context.Tipos.Remove(tipos);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            
+
         }
 
         private bool TiposExists(int id)
         {
-          return (_context.Tipos?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Tipos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 
 
 namespace WebApp.Services
@@ -38,7 +35,7 @@ namespace WebApp.Services
         public UserMessages(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
-            
+
         }
 
         public override bool AddUserMessageOnce(string msgId, string title, string message, IUserMessages.ErrorCode errorCode = IUserMessages.ErrorCode.INFO, int timeout = IUserMessages.DefaultTimeout)

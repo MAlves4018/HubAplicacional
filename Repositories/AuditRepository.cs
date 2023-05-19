@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Models;
-using WebApp.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Repositories
 {
@@ -22,7 +16,7 @@ namespace WebApp.Repositories
 
 
         public async Task<Audit> GetAudit(int id)
-        { 
+        {
             var audit = await _context.AuditLogs.FirstOrDefaultAsync(m => m.Id == id);
             return audit;
         }

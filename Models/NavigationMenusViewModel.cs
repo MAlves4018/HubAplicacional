@@ -7,5 +7,5 @@ namespace WebApp.Models
         public string Menus { get; set; }
     }
 
-    
+
 }

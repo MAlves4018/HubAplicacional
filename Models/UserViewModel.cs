@@ -1,13 +1,10 @@
-﻿
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using WebApp.Models.ApplicationModels;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models
 {
     public class UserViewModel
     {
-       /* [Required]*/
+        /* [Required]*/
         public string? Id { get; set; }
 
         [Required(ErrorMessage = "O NIM é obrigatório")]
@@ -28,7 +25,7 @@ namespace WebApp.Models
 
         [Display(Name = "Perfis")]
         public UserRolesViewModel[]? Roles { get; set; }
-        
+
         [Display(Name = "Permissões")]
         public RolePermission[]? Permissions { get; set; }
     }

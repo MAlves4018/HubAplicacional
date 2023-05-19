@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;   
-using System.Security.Claims; 
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Security.Claims;
 using WebApp.Data;
 using WebApp.Models;
 
@@ -11,7 +11,7 @@ namespace WebApp.Services
     {
         private readonly ApplicationDbContext _context;
 
-        public DynamicAuthorizationDataService(ApplicationDbContext context )
+        public DynamicAuthorizationDataService(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -27,26 +27,26 @@ namespace WebApp.Services
 
             // get all roles the principal belongs to
             var roleIds = await GetUserRoleIds(principal);
- 
+
             var menuItems = (from rid in roleIds
-                join
-                    v in (_context.RoleMenuPermissions).Include(x => x.NavigationMenu) on rid equals v.RoleId
-                select v.NavigationMenu).Distinct().ToList();
+                             join
+                                 v in (_context.RoleMenuPermissions).Include(x => x.NavigationMenu) on rid equals v.RoleId
+                             select v.NavigationMenu).Distinct().ToList();
 
             var treeRoot = ModelFactory.AsNavigationMenuNodeList(menuItems, null);
             return treeRoot;
         }
-        
+
 
         public async Task<bool> IsAdmin(ClaimsPrincipal ctx)
         {
             var userId = GetUserId(ctx);
 
             var roleIds = await (from role in _context.UserRoles
-                where role.UserId == userId
-                join s in _context.Roles on role.RoleId equals s.Id
-                select s.Name).ToListAsync();
-            
+                                 where role.UserId == userId
+                                 join s in _context.Roles on role.RoleId equals s.Id
+                                 select s.Name).ToListAsync();
+
             return roleIds.Contains("Admin");
         }
 
@@ -54,12 +54,17 @@ namespace WebApp.Services
         {
             var result = false;
             var roleIds = await GetUserRoleIds(ctx);
-            
+
             var data = await (from perm in _context.RoleMenuPermissions.Include("NavigationMenu")
-                    where roleIds.Contains(perm.RoleId)
-                    select perm)
-                .Select(m => new {  m.NavigationMenu.ControllerName, 
-                    m.NavigationMenu.ActionName, m.Get, m.Post})
+                              where roleIds.Contains(perm.RoleId)
+                              select perm)
+                .Select(m => new
+                {
+                    m.NavigationMenu.ControllerName,
+                    m.NavigationMenu.ActionName,
+                    m.Get,
+                    m.Post
+                })
                 .Distinct()
                 .ToListAsync();
 
@@ -67,11 +72,11 @@ namespace WebApp.Services
             {
                 return string.IsNullOrEmpty(a) ? string.IsNullOrEmpty(b) : a.Equals(b, StringComparison.CurrentCultureIgnoreCase);
             }
-            
+
             foreach (var item in data)
             {
-                result = ( IsSame(item.ControllerName, ctrl) && 
-                           IsSame( item.ActionName , act) &&
+                result = (IsSame(item.ControllerName, ctrl) &&
+                           IsSame(item.ActionName, act) &&
                            (isRead ? item.Get.Value : item.Post.Value)
                            );
                 if (result)
@@ -125,23 +130,23 @@ namespace WebApp.Services
                 return null;
             }
         }
-        
+
         public async Task<List<RoleUsersViewModel>> GetRoleMembersAsync(string roleId)
         {
-//            var items = await (_context.Users.OrderBy(u=>u.UserName).Join(// outer sequence 
-//                _context.UserRoles ,  // inner sequence 
-//                user => new {Id=user.Id, RoleId=roleId},    // outerKeySelector
-//                role => new {Id=role.UserId, RoleId=role.RoleId},  // innerKeySelector
-//                (user, role) => new RoleUsersViewModel()
-//                {
-//                    Id = user.Id,
-//                    UserName = user.UserName,
-//                    Selected = true
-//                })).AsNoTracking().ToListAsync();
+            //            var items = await (_context.Users.OrderBy(u=>u.UserName).Join(// outer sequence 
+            //                _context.UserRoles ,  // inner sequence 
+            //                user => new {Id=user.Id, RoleId=roleId},    // outerKeySelector
+            //                role => new {Id=role.UserId, RoleId=role.RoleId},  // innerKeySelector
+            //                (user, role) => new RoleUsersViewModel()
+            //                {
+            //                    Id = user.Id,
+            //                    UserName = user.UserName,
+            //                    Selected = true
+            //                })).AsNoTracking().ToListAsync();
             var items = (await _context.Users.OrderBy(u => u.UserName).ToListAsync()).Join(
-                (await _context.UserRoles.Where( r => r.RoleId == roleId).ToListAsync()),
-                user =>  user.Id,    // outerKeySelector
-                role =>  role.UserId,  // innerKeySelector
+                (await _context.UserRoles.Where(r => r.RoleId == roleId).ToListAsync()),
+                user => user.Id,    // outerKeySelector
+                role => role.UserId,  // innerKeySelector
                 (user, role) => new RoleUsersViewModel()
                 {
                     Id = user.Id,
@@ -154,17 +159,17 @@ namespace WebApp.Services
         public async Task<List<RoleUsersViewModel>> GetUsersRoleMembershipAsync(string roleId)
         {
             var items = (await _context.Users.OrderBy(u => u.UserName).ToListAsync()).GroupJoin(
-                (await _context.UserRoles.Where( r => r.RoleId == roleId).ToListAsync()),
-                user =>  user.Id,    
-                role =>  role.UserId,  
+                (await _context.UserRoles.Where(r => r.RoleId == roleId).ToListAsync()),
+                user => user.Id,
+                role => role.UserId,
                 (user, roleGroup) => new RoleUsersViewModel()
                 {
                     Id = user.Id,
                     UserName = user.UserName,
                     Selected = roleGroup.Any()
                 }).ToList();
-            
-            return  items;
+
+            return items;
         }
 
         public async Task<List<RolePermission>> GetUserPermissionsAsync(string userId)
@@ -209,45 +214,45 @@ namespace WebApp.Services
 
             return true;
         }
-        
+
         private async Task<List<string>> GetUserRoleIds(string userId)
         {
             var data = await (from role in _context.UserRoles
-                where role.UserId == userId
-                select role.RoleId).ToListAsync();
+                              where role.UserId == userId
+                              select role.RoleId).ToListAsync();
 
             return data;
         }
-        
+
         private async Task<List<string>> GetUserRoleIds(ClaimsPrincipal ctx)
         {
             var userId = GetUserId(ctx);
-            if(userId == null) 
+            if (userId == null)
             {
                 return new List<string> { };
-            } 
-            else 
+            }
+            else
             {
                 return await GetUserRoleIds(userId);
             }
 
         }
 
-        public async Task<List<UserRolesViewModel>> GetUserRoles(string  userId)
+        public async Task<List<UserRolesViewModel>> GetUserRoles(string userId)
         {
-            var data = await (from role in _context.UserRoles 
-                where role.UserId == userId
-                join s in _context.Roles on role.RoleId equals s.Id
-                select new UserRolesViewModel() {Id = s.Id, Name = s.Name, Selected = true}).OrderBy(m => m.Name).ToListAsync();
+            var data = await (from role in _context.UserRoles
+                              where role.UserId == userId
+                              join s in _context.Roles on role.RoleId equals s.Id
+                              select new UserRolesViewModel() { Id = s.Id, Name = s.Name, Selected = true }).OrderBy(m => m.Name).ToListAsync();
 
             return data;
         }
-        
-        
+
+
         private string GetUserId(ClaimsPrincipal user)
         {
             //return ((ClaimsIdentity) user.Identity).FindFirst(ClaimTypes.NameIdentifier)?.Value;
-           
+
             try
             {
                 var nim = user.Identity.Name.Split("\\")[1];
@@ -259,7 +264,7 @@ namespace WebApp.Services
             {
                 return null;
             }
-        
+
         }
     }
 }

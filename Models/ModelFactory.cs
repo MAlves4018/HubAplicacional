@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using WebApp.Data;
+﻿using WebApp.Data;
 
 namespace WebApp.Models
 {
@@ -14,9 +11,19 @@ namespace WebApp.Models
             foreach (var node in nodes)
             {
                 var x = node.Node;
-                itemList.Add(new NavigationMenu() { Id =  x.Id, Name = x.Name, ControllerName=x.ControllerName, 
-                    ActionName=x.ActionName, DisplayOrder=x.DisplayOrder, ExternalUrl=x.ExternalUrl, IsExternal=x.IsExternal, 
-                    ParentMenuId=x.ParentMenuId, Visible=x.Visible, NotAnActionOrController=x.NotAnActionOrController} );
+                itemList.Add(new NavigationMenu()
+                {
+                    Id =  x.Id,
+                    Name = x.Name,
+                    ControllerName=x.ControllerName,
+                    ActionName=x.ActionName,
+                    DisplayOrder=x.DisplayOrder,
+                    ExternalUrl=x.ExternalUrl,
+                    IsExternal=x.IsExternal,
+                    ParentMenuId=x.ParentMenuId,
+                    Visible=x.Visible,
+                    NotAnActionOrController=x.NotAnActionOrController
+                });
                 itemList.AddRange(AsNavigationMenuList(node.Children));
             }
 
@@ -31,7 +38,7 @@ namespace WebApp.Models
                         Node = new NavigationMenuModel()
                         {
                             Id = x.Id,
-                            Name = x.Name, 
+                            Name = x.Name,
                             ControllerName = x.ControllerName,
                             ActionName = x.ActionName,
                             DisplayOrder = x.DisplayOrder,
@@ -61,13 +68,13 @@ namespace WebApp.Models
             return itemList;
         }
 
-        public static NavigationMenuModel AsNavigationMenuModel( NavigationMenu x )
+        public static NavigationMenuModel AsNavigationMenuModel(NavigationMenu x)
         {
             return new NavigationMenuModel()
             {
                 Id = x.Id,
                 Name = x.Name,
-                ParentMenuId = x.ParentMenuId, 
+                ParentMenuId = x.ParentMenuId,
                 ControllerName = x.ControllerName,
                 ActionName = x.ActionName,
                 IsExternal = x.IsExternal,
@@ -76,6 +83,6 @@ namespace WebApp.Models
                 Visible = x.Visible
             };
         }
-        
+
     }
 }

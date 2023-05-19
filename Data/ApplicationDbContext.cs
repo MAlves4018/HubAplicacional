@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore; 
-using Microsoft.AspNetCore.Identity;
-using System;
-using WebApp.Models;   
-using System.Threading.Tasks; 
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
+using WebApp.Models;
 using WebApp.Models.ApplicationModels;
 
 namespace WebApp.Data
@@ -16,8 +12,8 @@ namespace WebApp.Data
         {
         }
 
-        public DbSet<RoleMenuPermission> RoleMenuPermissions { get; set; } 
-        public DbSet<NavigationMenu> NavigationMenus { get; set; } 
+        public DbSet<RoleMenuPermission> RoleMenuPermissions { get; set; }
+        public DbSet<NavigationMenu> NavigationMenus { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
 
         //APPLICATION SPECIFIC MODELS  
@@ -28,10 +24,10 @@ namespace WebApp.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<RoleMenuPermission>().HasKey(c => new {c.RoleId, c.NavigationMenuId});
+            builder.Entity<RoleMenuPermission>().HasKey(c => new { c.RoleId, c.NavigationMenuId });
 
             /* force unique username */
-            builder.Entity<ApplicationUser>() 
+            builder.Entity<ApplicationUser>()
                 .HasIndex(x => x.UserName)
                 .IsUnique();
 
@@ -54,12 +50,12 @@ namespace WebApp.Data
                 ConcurrencyStamp = "21a41ca8-d2e3-46ac-b53f-925edccd1eb7",
             };
 
-            var adminRole = new IdentityRole {Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "Admin"};
+            var adminRole = new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "Admin" };
             builder.Entity<IdentityRole>().HasData(adminRole);
 
 
             builder.Entity<ApplicationUser>().HasData(adminUser);
-             
+
             builder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string>() { UserId = adminUser.Id, RoleId = adminRole.Id }
             );
@@ -187,20 +183,20 @@ namespace WebApp.Data
             builder.Entity<NavigationMenu>().HasData(menus);
 
             builder.Entity<Tipos>().HasData(
-                new Tipos() { Id = 1, Ativo=true, Name="Bases de dados ORACLE", Ordem=1},
-                new Tipos() { Id = 2, Ativo =true, Name="Bases de dados SQL Server", Ordem=2},
-                new Tipos() { Id = 3, Ativo =true, Name="Servidores Aplicacionais", Ordem=3},
-                new Tipos() { Id = 4, Ativo =true, Name="Aplicações", Ordem=4}
+                new Tipos() { Id = 1, Ativo=true, Name="Bases de dados ORACLE", Ordem=1 },
+                new Tipos() { Id = 2, Ativo =true, Name="Bases de dados SQL Server", Ordem=2 },
+                new Tipos() { Id = 3, Ativo =true, Name="Servidores Aplicacionais", Ordem=3 },
+                new Tipos() { Id = 4, Ativo =true, Name="Aplicações", Ordem=4 }
             );
 
             //builder.Entity<Tecnologias>().HasData(
-                //new Tecnologias() { Id = 1, Name="GitHub", Descricao="", TypeId = 4 , Sigla = "GitHub", Link="https://github.com" }
-          //   );
+            //new Tecnologias() { Id = 1, Name="GitHub", Descricao="", TypeId = 4 , Sigla = "GitHub", Link="https://github.com" }
+            //   );
 
             foreach (var item in menus)
             {
                 builder.Entity<RoleMenuPermission>().HasData(
-                    new RoleMenuPermission {RoleId = adminRole.Id, NavigationMenuId = item.Id}
+                    new RoleMenuPermission { RoleId = adminRole.Id, NavigationMenuId = item.Id }
                 );
             }
 
@@ -220,7 +216,7 @@ namespace WebApp.Data
                 {
                     connection.CommandText = $"DELETE FROM dbo.ApplicationUserDeposito WHERE UsersId = '{userId}'";
                     var result = await connection.ExecuteScalarAsync();
-                    return (IEnumerable<int>) result;
+                    return (IEnumerable<int>)result;
                 }
                 finally
                 {
@@ -231,13 +227,13 @@ namespace WebApp.Data
 
         // AUXILIARY QUERIES FOR NOT MAPPED TABLES (NOT A GOOD PRACTICE, CHANGE WHEN MANY-TO-MANY IS SUPPORTED BY IDENTITYUSER)
         public DbSet<WebApp.Models.ApplicationModels.Tecnologias> Tecnologias { get; set; } = default!;
-         
+
         public DbSet<WebApp.Models.ApplicationModels.Tipos> Tipos { get; set; } = default!;
 
         public DbSet<WebApp.Models.ApplicationModels.EstadoTecnologia> EstadosTecnologia { get; set; } = default!;
 
         public DbSet<WebApp.Models.ApplicationModels.Deletedtecnologies> Deletedtecnologies { get; set; } = default!;
 
-        
+
     }
 }

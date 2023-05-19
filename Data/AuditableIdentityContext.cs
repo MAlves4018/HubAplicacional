@@ -1,19 +1,14 @@
-﻿using WebApp.Models;
-using WebApp.Models.ApplicationModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore; 
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using WebApp.Models;
+using WebApp.Models.ApplicationModels;
 
 namespace WebApp.Data
 {
     public abstract class AuditableIdentityContext : IdentityDbContext<ApplicationUser>
     {
-       
+
         public AuditableIdentityContext(DbContextOptions options) : base(options)
         {
         }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp.Services;
-using System.Threading.Tasks;
 
 namespace SIGE.ViewComponents
 {

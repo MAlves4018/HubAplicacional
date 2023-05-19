@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
@@ -155,14 +151,14 @@ namespace WebApp.Controllers
             {
                 _context.Deletedtecnologies.Remove(deletedtecnologies);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DeletedtecnologiesExists(int id)
         {
-          return (_context.Deletedtecnologies?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Deletedtecnologies?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

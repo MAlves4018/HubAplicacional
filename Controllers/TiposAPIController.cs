@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Models.ApplicationModels;
@@ -25,10 +20,10 @@ namespace WebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tipos>>> GetTipos()
         {
-          if (_context.Tipos == null)
-          {
-              return NotFound();
-          }
+            if (_context.Tipos == null)
+            {
+                return NotFound();
+            }
             return await _context.Tipos.ToListAsync();
         }
 
@@ -36,10 +31,10 @@ namespace WebApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Tipos>> GetTipos(int id)
         {
-          if (_context.Tipos == null)
-          {
-              return NotFound();
-          }
+            if (_context.Tipos == null)
+            {
+                return NotFound();
+            }
             var tipos = await _context.Tipos.FindAsync(id);
 
             if (tipos == null)
@@ -86,10 +81,10 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Tipos>> PostTipos(Tipos tipos)
         {
-          if (_context.Tipos == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Tipos'  is null.");
-          }
+            if (_context.Tipos == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Tipos'  is null.");
+            }
             _context.Tipos.Add(tipos);
             await _context.SaveChangesAsync();
 

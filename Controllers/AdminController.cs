@@ -2,19 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using WebApp.Models;
-using WebApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Storage;
 using Newtonsoft.Json;
-using WebApp.Data;
-using Microsoft.EntityFrameworkCore.Storage; 
-using WebApp.Models.ApplicationModels;
 using System.Data;
 using System.Reflection;
+using WebApp.Data;
+using WebApp.Models;
+using WebApp.Models.ApplicationModels;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -55,7 +50,7 @@ namespace WebApp.Controllers
             try
             {
                 var roles = await _roleManager.Roles.OrderBy(x => x.Name).ToListAsync();
-               
+
                 foreach (var item in roles)
                 {
                     roleViewModel.Add(new RoleViewModel()
@@ -82,7 +77,7 @@ namespace WebApp.Controllers
             if (role is null)
                 return RedirectToAction(nameof(Roles));
 
-            var viewModel = new RoleViewModel() {Id = role.Id, Name = role.Name};
+            var viewModel = new RoleViewModel() { Id = role.Id, Name = role.Name };
 
             var permissions = await _dataAccessService.GetRolePermissionsAsync(id);
 
@@ -104,7 +99,7 @@ namespace WebApp.Controllers
             if (role is null)
                 return RedirectToAction(nameof(Roles));
 
-            var viewModel = new RoleViewModel() {Id = role.Id, Name = role.Name};
+            var viewModel = new RoleViewModel() { Id = role.Id, Name = role.Name };
 
             var permissions = await _dataAccessService.GetRolePermissionsAsync(id);
             var sortedPermissions = ModelFactory.AsRolePermissionListSorted(permissions, null);
@@ -112,7 +107,7 @@ namespace WebApp.Controllers
 
             return View(viewModel);
         }
-        
+
 
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> EditRoleMembers(string id)
@@ -122,8 +117,8 @@ namespace WebApp.Controllers
             if (role is null)
                 return RedirectToAction(nameof(EditRole));
 
-            var viewModel = new RoleViewModel() {Id = role.Id, Name = role.Name};
-            
+            var viewModel = new RoleViewModel() { Id = role.Id, Name = role.Name };
+
             viewModel.Members = await _dataAccessService.GetUsersRoleMembershipAsync(id);
             ViewData["Title"] = "Editar Utilizadores do Perfil";
             return View(viewModel);
@@ -139,7 +134,7 @@ namespace WebApp.Controllers
                 foreach (var roleView in viewModel.Members)
                 {
                     var user = await _userManager.FindByIdAsync(roleView.Id);
-                    if( user == null) continue;
+                    if (user == null) continue;
 
                     if (roleView.Selected)
                     {
@@ -151,28 +146,28 @@ namespace WebApp.Controllers
                     }
 
                     var result = await _userManager.UpdateAsync(user);
-                    if (! result.Succeeded)
+                    if (!result.Succeeded)
                     {
                         foundError = true;
                         _userMessages.AddUserMessage("Editar Membros",
-                            "Não foi possível alterar o utilizador <strong>" + user.UserName +"</strong>" , IUserMessages.ErrorCode.DANGER, 3000);   
+                            "Não foi possível alterar o utilizador <strong>" + user.UserName +"</strong>", IUserMessages.ErrorCode.DANGER, 3000);
                     }
                 }
-                if(!foundError)
+                if (!foundError)
                     _userMessages.AddUserMessage("Editar permissões",
                         "As alterações foram guardadas com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
 
             }
-            catch (Exception )
+            catch (Exception)
             {
                 _userMessages.AddUserMessage("Editar Membros",
-                    "Não foi possível guardar as alterações" , IUserMessages.ErrorCode.DANGER, 3000);   
+                    "Não foi possível guardar as alterações", IUserMessages.ErrorCode.DANGER, 3000);
 
             }
 
             return RedirectToAction(nameof(Roles));
         }
-        
+
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> EditRolePermissions(RoleViewModel viewModel)
@@ -212,7 +207,7 @@ namespace WebApp.Controllers
             if (role is null)
                 return RedirectToAction(nameof(Roles));
 
-            var viewModel = new RoleViewModel() {Id = role.Id, Name = role.Name};
+            var viewModel = new RoleViewModel() { Id = role.Id, Name = role.Name };
 
             ViewData["Title"] = "Editar Perfil";
             return View(viewModel);
@@ -227,7 +222,7 @@ namespace WebApp.Controllers
                 var role = await _roleManager.FindByIdAsync(viewModel.Id);
                 role.Name = viewModel.Name;
 
-                if ((await _roleManager.UpdateAsync(role)).Succeeded  )
+                if ((await _roleManager.UpdateAsync(role)).Succeeded)
                 {
                     _userMessages.AddUserMessage("Editar Perfil",
                         "As alterações foram guardadas com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
@@ -237,8 +232,8 @@ namespace WebApp.Controllers
                 ModelState.AddModelError("Name",
                     "Não foi possível guardar as alterações.\nVerifique se esse nome já existe.");
 
-//                    _userMessages.AddUserMessage("Editar permissões",
-//                        "Não foi possível guardar as alterações.", IUserMessages.ErrorCode.DANGER, 6000);
+                //                    _userMessages.AddUserMessage("Editar permissões",
+                //                        "Não foi possível guardar as alterações.", IUserMessages.ErrorCode.DANGER, 6000);
             }
 
             ViewData["Title"] = "Editar Perfil";
@@ -248,8 +243,8 @@ namespace WebApp.Controllers
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> CreateRole()
         {
-            var adminRoles = _roleManager.Roles; 
-            var adminRole = await _roleManager.FindByNameAsync("Admin"); 
+            var adminRoles = _roleManager.Roles;
+            var adminRole = await _roleManager.FindByNameAsync("Admin");
 
             var viewModel = new RoleViewModel();
             var permissions = await _dataAccessService.GetRolePermissionsAsync(adminRole.Id);
@@ -265,14 +260,14 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var role = new IdentityRole() {Name = viewModel.Name};
+                var role = new IdentityRole() { Name = viewModel.Name };
                 var result = await _roleManager.CreateAsync(role);
 
-                if (result.Succeeded )
+                if (result.Succeeded)
                 {
                     _userMessages.AddUserMessage("Criar Perfil",
                         "O Perfil foi criado com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
-                    return RedirectToAction(nameof(Roles), new { Id=role.Id});
+                    return RedirectToAction(nameof(Roles), new { Id = role.Id });
                 }
 
                 ModelState.AddModelError("Name",
@@ -282,7 +277,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Criar Novo Perfil";
             return View(nameof(Roles), viewModel);
         }
-        
+
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> DeleteRole(string id)
         {
@@ -291,12 +286,12 @@ namespace WebApp.Controllers
             if (role is null)
                 return RedirectToAction(nameof(Roles));
 
-            var viewModel = new RoleViewModel() {Id = role.Id, Name = role.Name};
+            var viewModel = new RoleViewModel() { Id = role.Id, Name = role.Name };
 
             ViewData["Title"] = "Apagar Perfil";
             return View(viewModel);
         }
-        
+
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> DeleteRole(RoleViewModel viewModel)
@@ -305,9 +300,9 @@ namespace WebApp.Controllers
             {
                 var role = await _roleManager.FindByIdAsync(viewModel.Id);
 
-                if ( role != null && (await _roleManager.DeleteAsync(role)).Succeeded)
+                if (role != null && (await _roleManager.DeleteAsync(role)).Succeeded)
                 {
-                    
+
                     _userMessages.AddUserMessage("Apagar Perfil",
                         "O Perfil foi apagado com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
                     return RedirectToAction(nameof(Roles));
@@ -321,7 +316,7 @@ namespace WebApp.Controllers
                 _userMessages.AddUserMessage("Apagar Perfil",
                     "Não foi possível apagar o Perfil indicado.", IUserMessages.ErrorCode.DANGER, 3000);
             }
-            
+
             return RedirectToAction(nameof(Roles));
         }
 
@@ -338,7 +333,7 @@ namespace WebApp.Controllers
                 }
             ).ToListAsync();
 
-            
+
             foreach (var user in users)
             {
                 user.Roles = (await _dataAccessService.GetUserRoles(user.Id)).ToArray();
@@ -363,16 +358,16 @@ namespace WebApp.Controllers
             };
 
             viewModel.Roles = (await _dataAccessService.GetUserRoles(Id)).ToArray();
-           
-            
-             
 
-            var permissions = await _dataAccessService.GetRolePermissionsAsync(Id); 
+
+
+
+            var permissions = await _dataAccessService.GetRolePermissionsAsync(Id);
             var sortedPermissions = ModelFactory.AsRolePermissionListSorted(permissions, null);
             viewModel.Permissions = sortedPermissions.ToArray();
-             
 
-             
+
+
             ViewData["useLayout"] = p;
             return View(viewModel);
         }
@@ -394,7 +389,7 @@ namespace WebApp.Controllers
                 viewModel.Id = Id;
                 viewModel.Email = user?.Email;
                 viewModel.UserName = user?.UserName;
-                viewModel.PhoneNumber = user?.PhoneNumber; 
+                viewModel.PhoneNumber = user?.PhoneNumber;
 
                 ViewData["Title"] = "Editar utilizador";
 
@@ -433,9 +428,9 @@ namespace WebApp.Controllers
             }
             catch (Exception e)
             {
-    
+
             }
-            
+
             _userMessages.AddUserMessage("Editar perfil do Utilizador",
                 "As alterações solicitadas falharam", IUserMessages.ErrorCode.DANGER, 2500);
 
@@ -454,11 +449,14 @@ namespace WebApp.Controllers
 
                 var viewModel = new UserViewModel
                 {
-                    Id = Id, Email = user?.Email, UserName = user?.UserName, PhoneNumber = user?.PhoneNumber
+                    Id = Id,
+                    Email = user?.Email,
+                    UserName = user?.UserName,
+                    PhoneNumber = user?.PhoneNumber
                 };
 
                 var userRoles = await _userManager.GetRolesAsync(user);
- 
+
                 var allRoles = await _roleManager.Roles.ToListAsync();
                 viewModel.Roles = allRoles.Select(x => new UserRolesViewModel()
                 {
@@ -499,7 +497,7 @@ namespace WebApp.Controllers
                     "As alterações foram guardadas com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
 
                 return RedirectToAction(nameof(EditUserMembership));
-                
+
             }
             catch (Exception e)
             {
@@ -511,11 +509,11 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Editar utilizador";
             return View(viewModel);
         }
-        
+
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> CreateUser()
         {
-             var viewModel = new UserViewModel();
+            var viewModel = new UserViewModel();
 
             var allRoles = await _roleManager.Roles.ToListAsync();
             viewModel.Roles = allRoles.Select(x => new UserRolesViewModel()
@@ -569,14 +567,17 @@ namespace WebApp.Controllers
 
             var viewModel = new UserViewModel
             {
-                Id = Id, Email = user?.Email, UserName = user?.UserName, PhoneNumber = user?.PhoneNumber
+                Id = Id,
+                Email = user?.Email,
+                UserName = user?.UserName,
+                PhoneNumber = user?.PhoneNumber
             };
 
 
             ViewData["Title"] = "Apagar utilizador";
             return View(viewModel);
         }
-        
+
         [HttpPost]
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> DeleteUser(UserViewModel viewModel)
@@ -585,7 +586,7 @@ namespace WebApp.Controllers
             {
                 var user = await _userManager.FindByIdAsync(viewModel.Id);
 
-                if ( user != null && (await _userManager.DeleteAsync(user)).Succeeded)
+                if (user != null && (await _userManager.DeleteAsync(user)).Succeeded)
                 {
                     _userMessages.AddUserMessage("Apagar utilizador",
                         "O utilizador foi apagado com sucesso.", IUserMessages.ErrorCode.SUCCESS, 2500);
@@ -600,10 +601,10 @@ namespace WebApp.Controllers
                 _userMessages.AddUserMessage("Apagar utilizador",
                     "Não foi possível apagar o utilizador indicado.", IUserMessages.ErrorCode.DANGER, 3000);
             }
-            
+
             return RedirectToAction(nameof(Users));
         }
-        
+
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> ViewUserPermissions(string id)
         {
@@ -731,7 +732,7 @@ namespace WebApp.Controllers
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
         public async Task<IActionResult> Menus()
         {
-            var listMenus = await GetControllers(); 
+            var listMenus = await GetControllers();
             var treeRoot = ModelFactory.AsNavigationMenuNodeList(listMenus, null);
 
             var json = JsonConvert.SerializeObject(treeRoot);
@@ -741,7 +742,7 @@ namespace WebApp.Controllers
                 "Ordene os elementos arrastando o botão &emsp;<i class='bi bi-arrows-move text-warning'></i><br/><br/>Para editar faça duplo clique sobre o elemento pretendido",
                 IUserMessages.ErrorCode.INFO, 12000);
 
-            return View(viewModel); 
+            return View(viewModel);
         }
 
         [Authorize(Policy = DynamicPolicies.DynamicAdmin)]
@@ -806,7 +807,7 @@ namespace WebApp.Controllers
                         ControllerName = action.Controller.Replace("Controller", string.Empty),
                         ActionName = action.Action,
                         Name = action.Action,
-                        ParentMenuId = nodeController.Id, 
+                        ParentMenuId = nodeController.Id,
                         Id = Guid.NewGuid(),
                         ExternalUrl = "",
                         DisplayOrder = 1
