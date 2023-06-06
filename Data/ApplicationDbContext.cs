@@ -183,7 +183,7 @@ namespace WebApp.Data
             builder.Entity<NavigationMenu>().HasData(menus);
 
             builder.Entity<Tipos>().HasData(
-                new Tipos() { Id = 1, Ativo=true, Name="Bases de dados ORACLE", Ordem=1 },
+                new Tipos() { Id = 1, Ativo=true, Name="Bases de dados Mongodb", Ordem=1 },
                 new Tipos() { Id = 2, Ativo =true, Name="Bases de dados SQL Server", Ordem=2 },
                 new Tipos() { Id = 3, Ativo =true, Name="Servidores Aplicacionais", Ordem=3 },
                 new Tipos() { Id = 4, Ativo =true, Name="Aplicações", Ordem=4 }

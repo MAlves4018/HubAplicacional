@@ -97,29 +97,30 @@
 
     const CriarSeparadorTipo = (id, name, state) => {
         //Separador correspondente ao tipo.
-        separadorplacer = document.getElementById("separadorplacer")
-        pageplacer = document.getElementById("pageplacer")
-        let li = document.createElement("li");
-        li.className = "nav-item"
-        li.role = "presentation"
-        //let disabled = state == true ? "" : "disabled" ///// ="" state == true ? "" : "disabled"--------------------------------------------------------------------------------------
-        let disabled = state == true ? "" : "disabled"
+        //if (state == true) {
+            separadorplacer = document.getElementById("separadorplacer")
+            pageplacer = document.getElementById("pageplacer")
+            let li = document.createElement("li");
+            li.className = "nav-item"
+            li.role = "presentation"
+            //let disabled = state == true ? "" : "disabled" ///// ="" state == true ? "" : "disabled"--------------------------------------------------------------------------------------
+            let disabled = state == true ? "" : "disabled"
 
-        li.innerHTML =
-            `<button class="nav-link " id="${id}-tab" data-bs-toggle="tab" 
+            li.innerHTML =
+                `<button class="nav-link " id="${id}-tab" data-bs-toggle="tab" 
                          data-bs-target="#${name}" type="button" role="tab" aria-controls="${name}"
                                      aria-selected="true" ${disabled} onclick="OcultarElemento(this)">
                     ${name}
                 </button>`
 
-        separadorplacer.appendChild(li);
+            separadorplacer.appendChild(li);
 
-        let diva = document.createElement("div")
-        let oculto = state == true ? "" : "oculto"
+            let diva = document.createElement("div")
+            let oculto = state == true ? "" : "oculto"
 
-        diva.className = `divdeclass ${oculto}`
+            diva.className = `divdeclass ${oculto}`
 
-        diva.innerHTML = `
+            diva.innerHTML = `
             <div id="${id}" class="container tab-pane fade active show" role="tabpanel" aria-labelledby="#${name}-tab">
                 <br>
                         <c class="separadorname">${name}:</c>
@@ -129,7 +130,11 @@
                 </div>
             </div>`
 
-        pageplacer.appendChild(diva)
+            pageplacer.appendChild(diva)
+        //} else {
+
+        //}
+        
     }
 
     const AlertaDaCardErro = (a) => {
@@ -153,10 +158,12 @@
 //    document.getElementById(${ id } + "paracontagem").innerHTML = todos
 //}
 const PopularCardNumero1 = (bons, todos) => {
-    try {
+    //try {
+    console.log("PopularCardNumero1");
         const element = document.getElementById("1Mostrar");
         if (element) {
             element.innerHTML = bons + "/" + todos;
+            console.log(element.innerHTML);
         }
         if (bons != todos) {
             document.getElementById("1BasesdedadosORACLECard").classList.add("card-off");
@@ -164,9 +171,9 @@ const PopularCardNumero1 = (bons, todos) => {
             document.getElementById("1BasesdedadosORACLECard").classList.remove("card-off");
         }
         document.getElementById("1paracontagem").innerHTML = todos;
-    } catch (error) {
-        console.error(error);
-    }
+    //} catch (error) {
+    //    console.error(error);
+    //}
 };
 //const PopularCardNumero1 = (bons, todos) => {
 //    try {
@@ -185,7 +192,7 @@ const PopularCardNumero1 = (bons, todos) => {
 //    }
 
 const PopularCardNumero2 = (bons, todos) => {
-    try {
+   /* try {*/
 //Completa a card numero 2(Bases de dados SQL Server) com o numero de tecnologias que estão de pé pelo total de tecnologias.
         document.getElementById("2Mostrar").innerHTML = (bons + "/" + todos);
         if (bons != todos) {
@@ -195,13 +202,13 @@ const PopularCardNumero2 = (bons, todos) => {
             document.getElementById("2BasesdedadosSQLServerCard").classList.remove("card-off")
         }
         document.getElementById("2paracontagem").innerHTML = todos
-    } catch (error) {
-        console.error(error);
-    }
+    //} catch (error) {
+    //    console.error(error);
+    //}
         
     }
 const PopularCardNumero3 = (bons, todos) => {
-    try {
+/*    try {*/
   //Completa a card numero 3(Servidores Aplicacionais) com o numero de tecnologias que estão de pé pelo total de tecnologias. 
         document.getElementById("3Mostrar").innerHTML = (bons + "/" + todos);
         if (bons != todos) {
@@ -211,14 +218,14 @@ const PopularCardNumero3 = (bons, todos) => {
             document.getElementById("3ServidoresAplicacionaisCard").classList.remove("card-off")
         }
     document.getElementById("3paracontagem").innerHTML = todos
-    } catch (error) {
-        console.error(error);
-    }
+    //} catch (error) {
+    //    console.error(error);
+    //}
       
 
     }
 const PopularCardNumero4 = (bons, todos) => {
-    try {
+    /*try {*/
 
         //Completa a card numero 4(Aplicações) com o numero de tecnologias que estão de pé pelo total de tecnologias.
         document.getElementById("4Mostrar").innerHTML = (bons + "/" + todos);
@@ -230,9 +237,9 @@ const PopularCardNumero4 = (bons, todos) => {
         }
 
         document.getElementById("4paracontagem").innerHTML = todos
-    } catch (error) {
-        console.error(error);
-    }
+    //} catch (error) {
+    //    console.error(error);
+    //}
 
     }
 
@@ -348,50 +355,54 @@ const PainelDeControlo = async () => {
         const data = await response.json();
 
         data.forEach(ele => {
-            if (!ele.tecnologias.apagado) {
-                switch (ele.tecnologias.typeId) {
-                    case 1:
-                        if (ele.tipo.ativo) {
-                               if (ele.ok == true) {
-                                    totaldeaplicacoestypeum++;
-                                    respostaspositivastypeum++;
-                                } else {
-                                    totaldeaplicacoestypeum++;
-                                }
-                        } 
-                        
-                        break;
-                    case 2:
-                        if (ele.ok == true) {
-                            sqltot++;
-                            sqlup++;
-                        } else {
-                            sqltot++;
-                        }
-                        break;
-                    case 3:
-                        if (ele.ok == true) {
-                            totaldeaplicacoestypetres++;
-                            respostaspositivastypetres++;
-                        } else {
-                            totaldeaplicacoestypetres++;
-                        }
-                        break;
-                    case 4:
-                        if (ele.ok == true) {
-                            totaldeaplicacoestypequatro++;
-                            respostaspositivastypequatro++;
-                        } else {
-                            totaldeaplicacoestypequatro++;
-                        }
-                        break;
-                    default:
-                        break;
+          
+
+                if (!ele.tecnologias.apagado) {
+                    switch (ele.tecnologias.typeId) {
+                        case 1:
+                            /*if (ele.tipo.ativo) {*/
+                            if (ele.ok == true) {
+                                totaldeaplicacoestypeum++;
+                                respostaspositivastypeum++;
+                            } else {
+                                totaldeaplicacoestypeum++;
+                            }
+                            /* } */
+
+                            break;
+                        case 2:
+                            if (ele.ok == true) {
+                                sqltot++;
+                                sqlup++;
+                            } else {
+                                sqltot++;
+                            }
+                            break;
+                        case 3:
+                            if (ele.ok == true) {
+                                totaldeaplicacoestypetres++;
+                                respostaspositivastypetres++;
+                            } else {
+                                totaldeaplicacoestypetres++;
+                            }
+                            break;
+                        case 4:
+                            if (ele.ok == true) {
+                                totaldeaplicacoestypequatro++;
+                                respostaspositivastypequatro++;
+                            } else {
+                                totaldeaplicacoestypequatro++;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
+            
         });
 
         PopularCardNumero1(respostaspositivastypeum, totaldeaplicacoestypeum);
+        console.log(respostaspositivastypeum + "/" + totaldeaplicacoestypeum)
         PopularCardNumero2(sqlup, sqltot);
         PopularCardNumero3(respostaspositivastypetres, totaldeaplicacoestypetres);
         PopularCardNumero4(respostaspositivastypequatro, totaldeaplicacoestypequatro);
@@ -403,31 +414,7 @@ const PainelDeControlo = async () => {
 function MetodoInicialParaFetch() {
 
     AcertadorDeModo();
-    fetch("/api/TiposAPI").then(
-        response => response.json()
-    ).then(
-        data => {
-            //if (ele.ativo)
-            separadorplacer = document.getElementById("separadorplacer");
-            separadorplacer.innerHTML = '';
-            pageplacer = document.getElementById("pageplacer");
-            pageplacer.innerHTML = '';
-            data.forEach(
-                ele => {
-                    CriarSeparadorTipo(ele.id, ele.name, ele.ativo);
-                    if (ele.ativo == false) {
-                        var bbb = document.getElementById("1Mostrar");
-                        bbb.id = `${ele.id}Ocultar`
-                        bbb.innerHTML = "**/**"
-
-
-                    }
-                }
-            );
-        }
-    ).catch(error => {
-        console.log(error);
-    });
+    
 
 
     fetch("/api/TecnologiasAPI").then(
@@ -452,6 +439,34 @@ function MetodoInicialParaFetch() {
     ).catch(error => {
         console.log(error);
     });
+
+    fetch("/api/TiposAPI").then(
+        response => response.json()
+    ).then(
+        data => {
+            //if (ele.ativo)
+            separadorplacer = document.getElementById("separadorplacer");
+            separadorplacer.innerHTML = '';
+            pageplacer = document.getElementById("pageplacer");
+            pageplacer.innerHTML = '';
+            data.forEach(
+                ele => {
+                    CriarSeparadorTipo(ele.id, ele.name, ele.ativo);
+                    if (ele.ativo == false) {
+                        //var bbb = document.getElementById("1Mostrar");
+                        //bbb.id = `${ele.id}Ocultar`
+                        //bbb.innerHTML = "**/**"
+
+
+                    }
+                }
+            );
+        }
+    ).catch(error => {
+        console.log(error);
+    });
+
+
     PainelDeControlo();
 }
 //const Assertartipos = () = {

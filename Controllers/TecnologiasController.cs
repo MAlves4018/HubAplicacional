@@ -72,30 +72,43 @@ namespace WebApp.Controllers
             string wwwRootPath = _hostEnvironment.WebRootPath;
             if (tecnologias.ImageFile != null)
             {
-                var files = Directory.GetFiles("C:\\Users\\255667182\\source\\repos\\HubAplicacional\\wwwroot\\Image\\");
-                foreach (var item in files)
+               // string wwwRootPath = _hostEnvironment.WebRootPath;
+                var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
+                string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
+                tecnologias.ImageName = fileName = fileName + extencion;
+                string path = Path.Combine(wwwRootPath + "/Image/", fileName); //tecnologias.
+
+                //Console.WriteLine(tecnologias.ImageFile.FileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    if (item== tecnologias.ImageFile.FileName)
-                    {
-                        var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
-                        string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
-                        tecnologias.ImageName = fileName = fileName + extencion;
-                        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-                    }
-                    else
-                    {
-
-                        var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
-                        string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
-                        tecnologias.ImageName = fileName = fileName + extencion;
-                        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-
-                        using (var fileStream = new FileStream(path, FileMode.Create))
-                        {
-                            await tecnologias.ImageFile.CopyToAsync(fileStream);
-                        }
-                    }
+                    await tecnologias.ImageFile.CopyToAsync(fileStream);
                 }
+
+                //var files = Directory.GetFiles("C:\\Users\\255667182\\source\\repos\\HubAplicacional\\wwwroot\\Image\\");
+                //foreach (var item in files)
+                //{
+                //    if (item== tecnologias.ImageFile.FileName)
+                //    {
+                //        var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
+                //        string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
+                //        tecnologias.ImageName = fileName = fileName + extencion;
+                //        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                //    }
+                //    else
+                //    {
+
+                //        var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
+                //        string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
+                //        tecnologias.ImageName = fileName = fileName + extencion;
+                //        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+
+                //        using (var fileStream = new FileStream(path, FileMode.Create))
+                //        {
+                //            await tecnologias.ImageFile.CopyToAsync(fileStream);
+                //        }
+                //    }
+                //}
             }
             else
             {
@@ -140,10 +153,10 @@ namespace WebApp.Controllers
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
                 string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
-                tecnologias.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extencion;
+                tecnologias.ImageName = fileName = fileName + extencion;
                 string path = Path.Combine(wwwRootPath + "/Image/", fileName); //tecnologias.
 
-                Console.WriteLine(tecnologias.ImageFile.FileName);
+                //Console.WriteLine(tecnologias.ImageFile.FileName);
 
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {

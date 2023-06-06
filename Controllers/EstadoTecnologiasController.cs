@@ -6,10 +6,14 @@ using WebApp.Data;
 using WebApp.Models.ApplicationModels;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
-using Oracle.ManagedDataAccess.Client;
+
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Microsoft.AspNetCore.Authorization;
 using WebApp.Services;
+using System.Net.Http;
+using MongoDB.Driver;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using MongoDB.Bson;
 
 namespace WebApp.Controllers
 {
@@ -48,97 +52,39 @@ namespace WebApp.Controllers
                 var user = "user_for_tests";
                 var pwd = "HYj56@eeRy";
                 var res_query = -1;
+                //var mongouser = "hubaplicacionalassistent";
+
+
+
                 switch (tecnologias.TypeId)
                 {
-                    //Bases Dados ORACLE
+                    //Bases Dados mongodb
                     case 1:
-                        //var EXAMPLE_CONNECTION = "Data Source=MyOracleDB;User Id=myUsername;Password=myPassword;Integrated Security=no;";
 
-                        //if (tecnologias != null)
-                        //{
-                        //    tecnologias.Link = tecnologias.Link.Replace("USER_REPLACE_ME", user).Replace("PASSWORD_REPLACE_ME", pwd);
-                        //    var test_query_oracle = "SELECT * FROM XXX WHERE rownum = 1";
-                        //    using (OracleConnection connection = new OracleConnection(tecnologias.Link))
-                        //    {
-                        //        try
-                        //        {
-                        //            connection.Open();
-                        //            Console.WriteLine("Connection established!");
-                        //            OracleCommand command = new OracleCommand(test_query_oracle, connection);
-                        //            OracleDataReader reader = command.ExecuteReader();
-
-                        //            while (reader.Read())
-                        //            {
-                        //                Console.WriteLine(reader.GetString(0));
-                        //            }
-
-                        //            reader.Close();
-                        //        }
-                        //        catch (Exception ex)
-                        //        {
-
-                        //            Console.WriteLine("Failed to connect to database: " + ex.Message);
-                        //        }
-                        //    }
-                        //}
-                        if (tecnologias != null)
+                        var connectionString = tecnologias.Link;
+                        
+                        //.Replace("USER_REPLACE_ME", mongouser).Replace("PASSWORD_REPLACE_ME", pwd);
+                        var clientSettings = MongoClientSettings.FromConnectionString(connectionString);
+                        try 
                         {
-                            //tecnologias.Link = tecnologias.Link.Replace("USER_REPLACE_ME", user).Replace("PASSWORD_REPLACE_ME", pwd);
-                            //var test_query_oracle = "SELECT * FROM XXX WHERE rownum = 1";
-                            //using (OracleConnection connection = new OracleConnection(tecnologias.Link))
-                            //{
-                            //    try
-                            //    {
-                            //        connection.Open();
-                            //        Console.WriteLine("Connection established!");
-                            //        using (OracleCommand command = new OracleCommand(test_query_oracle, connection))
-                            //        {
-                            //            OracleDataReader reader = command.ExecuteReader();
-                            //            while (reader.Read())
-                            //            {
-                            //                Console.WriteLine(reader.GetString(0));
-                            //            }
-                            //        }
-                            //    }
-                            //    catch (OracleException ex)
-                            //    {
-                            //        Console.WriteLine("Failed to connect to database: " + ex.Message);
-                            //    }
-                            //    finally
-                            //    {
-                            //        connection.Close();
-                            //    }
-                            //}
+                            var mongoClient = new MongoClient(clientSettings);
+                            var mongoDatabase = mongoClient.GetDatabase("Hubaplicacionalstmongodb");
+                            // Substitua "nome_do_database" pelo nome real do seu banco de dados MongoDB
+                            var collection = mongoDatabase.GetCollection<BsonDocument>("Hubaplicacionalstmongodbcolection"); // Substitua "nome_da_colecao" pelo nome real da coleção
+                            estadoTecnologia.Ok = true;
+                            estadoTecnologia.StatusCode = 200;
+                            estadoTecnologia.Message = "Bases Dados MongoDB a funcionar perfeitamente";
+                        }
+                        catch (Exception e)
+                        {
 
-                            tecnologias.Link = tecnologias.Link.Replace("USER_REPLACE_ME", user).Replace("PASSWORD_REPLACE_ME", pwd);
-                            var test_query_oracle = "SELECT * FROM XXX WHERE rownum = 1";
-                            using (OracleConnection connection = new OracleConnection(tecnologias.Link))
-                            {
-                                try
-                                {
-                                    connection.Open();
-                                    Console.WriteLine("Connection established!");
-                                    using (OracleCommand command = new OracleCommand(test_query_oracle, connection))
-                                    {
-                                        OracleDataReader reader = command.ExecuteReader();
-                                        while (reader.Read())
-                                        {
-                                            Console.WriteLine(reader.GetString(0));
-                                        }
-                                    }
-                                }
-                                catch (OracleException ex)
-                                {
-                                    Console.WriteLine("Failed to connect to database: " + ex.Message);
-                                }
-                                finally
-                                {
-                                    connection.Close();
-                                }
-                            }
+                            throw;
                         }
 
+                        
                         break;
+
+                   
                     //Bases Dados SQL Server
                     case 2:
                         var test_query_sql_server = "SELECT TOP(1) Id FROM Tipos";
@@ -223,9 +169,9 @@ namespace WebApp.Controllers
                 }
                 var oldEstadoTecnologia = await _context.EstadosTecnologia
                 .Where(x => x.IdTecnologia == tecnologiaId)
-                .OrderByDescending(m => m.Timestamp)
                 .FirstOrDefaultAsync();
-                Console.WriteLine(oldEstadoTecnologia);
+               // .OrderByDescending(m => m.Timestamp)
+               
                 if (oldEstadoTecnologia != null)
                 {
                     if ((estadoTecnologia.Ok != oldEstadoTecnologia.Ok) || (estadoTecnologia.StatusCode != oldEstadoTecnologia.StatusCode) || (estadoTecnologia.Message != oldEstadoTecnologia.Message))

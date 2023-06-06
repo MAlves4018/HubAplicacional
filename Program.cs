@@ -87,13 +87,13 @@ if (app.Environment.IsProduction())
 
 
 app.UseHttpsRedirection();
-app.UseFileServer(new FileServerOptions()
-{
-    FileProvider = new PhysicalFileProvider(
-    Path.Combine(Directory.GetCurrentDirectory(), @"node_modules")),
-    RequestPath = new PathString("/node_modules"),
-    EnableDirectoryBrowsing = true
-});
+//app.UseFileServer(new FileServerOptions()
+//{
+//    FileProvider = new PhysicalFileProvider(
+//    Path.Combine(Directory.GetCurrentDirectory(), @"node_modules")),
+//    RequestPath = new PathString("/node_modules"),
+//    EnableDirectoryBrowsing = true
+//});
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
