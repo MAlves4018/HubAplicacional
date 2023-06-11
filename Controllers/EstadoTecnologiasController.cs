@@ -1,19 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using WebApp.Data;
 using WebApp.Models.ApplicationModels;
-using System.Data.SqlClient;
-using Microsoft.AspNetCore.Http;
-
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using Microsoft.AspNetCore.Authorization;
 using WebApp.Services;
-using System.Net.Http;
-using MongoDB.Driver;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using MongoDB.Bson;
 
 namespace WebApp.Controllers
 {
@@ -62,10 +55,10 @@ namespace WebApp.Controllers
                     case 1:
 
                         var connectionString = tecnologias.Link;
-                        
+
                         //.Replace("USER_REPLACE_ME", mongouser).Replace("PASSWORD_REPLACE_ME", pwd);
                         var clientSettings = MongoClientSettings.FromConnectionString(connectionString);
-                        try 
+                        try
                         {
                             var mongoClient = new MongoClient(clientSettings);
                             var mongoDatabase = mongoClient.GetDatabase("Hubaplicacionalstmongodb");
@@ -81,10 +74,10 @@ namespace WebApp.Controllers
                             throw;
                         }
 
-                        
+
                         break;
 
-                   
+
                     //Bases Dados SQL Server
                     case 2:
                         var test_query_sql_server = "SELECT TOP(1) Id FROM Tipos";
@@ -144,7 +137,7 @@ namespace WebApp.Controllers
                         break;
                     //Servidores Aplicacionais/Aplicações
                     case 3:
-                    case 4: 
+                    case 4:
                         using (HttpResponseMessage response = new HttpResponseMessage())
                         {
                             try
@@ -170,8 +163,8 @@ namespace WebApp.Controllers
                 var oldEstadoTecnologia = await _context.EstadosTecnologia
                 .Where(x => x.IdTecnologia == tecnologiaId)
                 .FirstOrDefaultAsync();
-               // .OrderByDescending(m => m.Timestamp)
-               
+                // .OrderByDescending(m => m.Timestamp)
+
                 if (oldEstadoTecnologia != null)
                 {
                     if ((estadoTecnologia.Ok != oldEstadoTecnologia.Ok) || (estadoTecnologia.StatusCode != oldEstadoTecnologia.StatusCode) || (estadoTecnologia.Message != oldEstadoTecnologia.Message))
@@ -185,14 +178,14 @@ namespace WebApp.Controllers
                 {
                     _context.Add(estadoTecnologia);
                 }
-                
+
                 await _context.SaveChangesAsync();
                 return estadoTecnologia;
             }
             catch (Exception e)
             {
                 //A tipologia não existe 
-                throw ;
+                throw;
             }
         }
         //---------------para fazer aquilo de apagar os estados ao apagar as tecs

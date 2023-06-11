@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Models.ApplicationModels;
@@ -26,11 +20,11 @@ namespace WebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EstadoTecnologia>>> GetEstadosTecnologia()
         {
-          if (_context.EstadosTecnologia == null)
-          {
-              return NotFound();
-          }
-            var estadosTecnologiasMaisRecentes =await _context.EstadosTecnologia
+            if (_context.EstadosTecnologia == null)
+            {
+                return NotFound();
+            }
+            var estadosTecnologiasMaisRecentes = await _context.EstadosTecnologia
                 .OrderByDescending(m => m.Timestamp)
                 .ToArrayAsync();
 
@@ -38,7 +32,7 @@ namespace WebApp.Controllers
 
             // Buscar tecnologias
             var todasTecnlogias = await _context.Tecnologias.Include(t => t.Tipo).ToListAsync();
-           // var tipos= await _context.Tecnologias.Tipo.ToListAsync();
+            // var tipos= await _context.Tecnologias.Tipo.ToListAsync();
 
             if (todasTecnlogias != null)
             {
@@ -64,10 +58,10 @@ namespace WebApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<EstadoTecnologia>> GetEstadoTecnologia(int id)
         {
-          if (_context.EstadosTecnologia == null)
-          {
-              return NotFound();
-          }
+            if (_context.EstadosTecnologia == null)
+            {
+                return NotFound();
+            }
             var estadoTecnologia = await _context.EstadosTecnologia.FindAsync(id);
 
             if (estadoTecnologia == null)
@@ -114,10 +108,10 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<EstadoTecnologia>> PostEstadoTecnologia(EstadoTecnologia estadoTecnologia)
         {
-          if (_context.EstadosTecnologia == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.EstadosTecnologia'  is null.");
-          }
+            if (_context.EstadosTecnologia == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.EstadosTecnologia'  is null.");
+            }
             _context.EstadosTecnologia.Add(estadoTecnologia);
             await _context.SaveChangesAsync();
 

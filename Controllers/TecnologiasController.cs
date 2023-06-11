@@ -72,7 +72,7 @@ namespace WebApp.Controllers
             string wwwRootPath = _hostEnvironment.WebRootPath;
             if (tecnologias.ImageFile != null)
             {
-               // string wwwRootPath = _hostEnvironment.WebRootPath;
+                // string wwwRootPath = _hostEnvironment.WebRootPath;
                 var fileName = Path.GetFileNameWithoutExtension(tecnologias.ImageFile.FileName);
                 string extencion = Path.GetExtension(tecnologias.ImageFile.FileName);
                 tecnologias.ImageName = fileName = fileName + extencion;
