@@ -70,7 +70,7 @@
                 document.querySelector("body").classList.remove("dark-mode");
                 document.getElementById("dark-mode-1").classList.add("oculto")
                 document.getElementById("light-mode-on").classList.remove("oculto")
-            }
+            } 
         }
 
         const CriarCardTecnologia = (titulo, text, img, btnlink) => {
@@ -271,6 +271,9 @@
                     if (!ele.tecnologias.apagado) {
                         switch (ele.tecnologias.typeId) {
                             case 1:
+                            if(ele.tecnologias.tipo.ativo==false){
+                                break;
+                            }
                                 if (ele.ok == true) {
                                     totaldeaplicacoestypeum++;
                                     respostaspositivastypeum++;
@@ -279,6 +282,9 @@
                                 }
                                 break;
                             case 2:
+                            if(ele.tecnologias.tipo.ativo==false){
+                                break;
+                            }
                                 if (ele.ok == true) {
                                     sqltot++;
                                     sqlup++;
@@ -287,6 +293,9 @@
                                 }
                                 break;
                             case 3:
+                            if(ele.tecnologias.tipo.ativo==false){
+                                break;
+                            }
                                 if (ele.ok == true) {
                                     totaldeaplicacoestypetres++;
                                     respostaspositivastypetres++;
@@ -295,6 +304,9 @@
                                 }
                                 break;
                             case 4:
+                                if (ele.tecnologias.tipo.ativo == false) {
+                                    break;
+                                }
                                 if (ele.ok == true) {
                                     totaldeaplicacoestypequatro++;
                                     respostaspositivastypequatro++;
