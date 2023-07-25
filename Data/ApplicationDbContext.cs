@@ -232,8 +232,6 @@ namespace WebApp.Data
 
         public DbSet<WebApp.Models.ApplicationModels.EstadoTecnologia> EstadosTecnologia { get; set; } = default!;
 
-        public DbSet<WebApp.Models.ApplicationModels.Deletedtecnologies> Deletedtecnologies { get; set; } = default!;
-
 
     }
 }

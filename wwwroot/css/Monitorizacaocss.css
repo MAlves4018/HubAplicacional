@@ -1,0 +1,55 @@
+﻿.oculto {
+    display: none;
+}
+
+.cdarkativo {
+    background-color: dimgray;
+}
+
+.dark-mode .tab-content {
+    background-color: var(--dark);
+}
+
+.dark-mode button.nav-link {
+    color: white;
+}
+
+.dark-mode .custom-card {
+    background-color: #8f8f8f;
+}
+
+    .dark-mode .custom-card.card-off {
+        box-shadow: 0px 0px 11px 7px #f31c1c8c !important;
+    }
+
+.dark-mode .separadorname {
+    background-color: var(--dark);
+    color: white;
+}
+
+.dark-mode .separadornumber {
+    background-color: var(--dark);
+    color: white;
+}
+
+.dark-mode {
+    background-color: var(--dark);
+    color: white;
+}
+
+.custom-card-img-top {
+    border: 1px solid grey;
+}
+
+/*#e2e2e2*/
+.separadorname {
+    font-size: x-large;
+    color: black;
+    text-decoration: none;
+}
+
+.separadornumber {
+    font-size: xx-large;
+    color: black;
+    text-decoration: none;
+}
